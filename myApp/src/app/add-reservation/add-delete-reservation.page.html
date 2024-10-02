@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reservation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Formulaire pour ajouter une nouvelle réservation -->
+  <ion-item>
+    <ion-label position="floating">Date</ion-label>
+    <ion-datetime [(ngModel)]="reservationData.date"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Passager ID</ion-label>
+    <ion-input [(ngModel)]="reservationData.passager"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Trajet</ion-label>
+    <ion-input [(ngModel)]="reservationData.trajet"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Confirmed</ion-label>
+    <ion-checkbox [(ngModel)]="reservationData.confirmed"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Cancelled</ion-label>
+    <ion-checkbox [(ngModel)]="reservationData.cancelled"></ion-checkbox>
+  </ion-item>
+
+  <ion-button expand="block" (click)="addReservation()">Add Reservation</ion-button>
+
+  <!-- Liste des réservations -->
+
+</ion-content>

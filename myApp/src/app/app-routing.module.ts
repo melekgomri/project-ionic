@@ -34,6 +34,18 @@ const routes: Routes = [
   {
     path: 'list-trajet',
     loadChildren: () => import('./list-trajet/list-trajet.module').then( m => m.ListTrajetPageModule)
+  },
+  {
+    path: 'add-delete-reservation',
+    loadChildren: () => import('./add-reservation/add-delete-reservation.module').then( m => m.AddDeleteReservationPageModule)
+  },
+  {
+    path: 'liste-delete-reservation',
+    loadChildren: () => import('./liste-delete-reservation/liste-delete-reservation.module').then( m => m.ListeDeleteReservationPageModule)
+  },
+  {
+    path: 'utilisteur-list',
+    loadChildren: () => import('./utilisteur-list/utilisteur-list.module').then( m => m.UtilisteurListPageModule)
   }
 ];
 
