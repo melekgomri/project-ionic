@@ -12,10 +12,6 @@
         <p>{{ contact.numtelephone }} - {{ contact.email }}</p>
       </ion-label>
 
-      <!-- Bouton Modifier (Update) -->
-      <ion-button (click)="updateContact(contact._id, { name: 'Updated Name', lastname: 'Updated Lastname' })">
-        Update
-      </ion-button>
 
       <!-- Bouton Supprimer (Delete) -->
       <ion-button color="danger" (click)="deletecontact(contact._id)">
