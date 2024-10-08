@@ -15,18 +15,30 @@ export class LoginPage  {
 
 
   constructor(private authservice: AuthService, private router:Router) { }
-login(){
-  this.authservice.login(this.loginData).subscribe(
-    (response)=>{
-      console.log('user logged in succeful',response);
-      localStorage.setItem('token',response.token);
-      this.router.navigate(['/home']);
-    },
-    (error)=>{
-      console.log('error logging in',error);
-    }
-  );
-}
+  login() {
+    this.authservice.login(this.loginData).subscribe(
+      (response) => {
+        console.log('User logged in successfully', response);
+        localStorage.setItem('token', response.token);
+        
+
+        console.log('isCovoitureur:', response.isCovoitureur);
+        console.log('isAdmin:', response.isAdmin);
+
+        if (response.isCovoitureur === true && response.isAdmin === false) {
+          this.router.navigate(['/trajet']);  
+        } else if (response.isCovoitureur === false && response.isAdmin === false) {
+          this.router.navigate(['/list-trajet']);  
+        } else {
+          
+          console.log('User is an Admin or other role');
+        }
+      },
+      (error) => {
+        console.error('Error logging in', error);
+      }
+    );
+  }
  
 
 }
