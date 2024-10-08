@@ -1,0 +1,39 @@
+
+ion-content {
+ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .background-image {
+    width: 100%;
+    height: 300px; 
+    overflow: hidden; 
+  }
+  
+  .background-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .login-container {
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 10px; 
+    padding: 20px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    width: 90%; 
+    margin-left: 15px;
+    max-width: 400px; 
+ 
+  }
+  
+  ion-button {
+    --background: #ff5722; 
+    --color: white; 
+    border-radius: 5px; 
+  }
+  
+  ion-button:active {
+    --background: #e64a19; 
+  }

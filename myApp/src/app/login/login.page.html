@@ -5,15 +5,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">Email</ion-label>
-    <ion-input [(ngModel)]="loginData.email" type="email"></ion-input>
-  </ion-item>
+  <div class="background-image">
+    <img src="assets/background.jpg" alt="Background Image" />
+  </div>
 
-  <ion-item>
-    <ion-label position="floating">Mot de passe</ion-label>
-    <ion-input [(ngModel)]="loginData.password" type="password"></ion-input>
-  </ion-item>
 
-  <ion-button expand="block" (click)="login()">Se connecter</ion-button>
+  <div class="login-container">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="loginData.email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input [(ngModel)]="loginData.password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="login()">Se connecter</ion-button>
+  </div>
 </ion-content>
