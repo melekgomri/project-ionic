@@ -37,3 +37,14 @@ ion-content {
   ion-button:active {
     --background: #e64a19; 
   }
+
+  .account-message {
+    display: block; 
+    margin-top: 15px; 
+    color: #ff5722; 
+    text-align: center; 
+    text-decoration: none; 
+    font-size: 12px; 
+    font-weight: bold; 
+    transition: color 0.3s ease; 
+  }

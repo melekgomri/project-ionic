@@ -5,36 +5,39 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">Nom</ion-label>
-    <ion-input [(ngModel)]="userdata.name"></ion-input>
-  </ion-item>
+  <div class="register-content">
+    <img class="register-image" src="../../assets/background.jpg" alt="Registration Image" />
+    <div class="register-container">
+      <ion-item>
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input [(ngModel)]="userdata.name"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Prénom</ion-label>
-    <ion-input [(ngModel)]="userdata.lastname"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="floating">Prénom</ion-label>
+        <ion-input [(ngModel)]="userdata.lastname"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Email</ion-label>
-    <ion-input [(ngModel)]="userdata.email" type="email"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="userdata.email" type="email"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Mot de passe</ion-label>
-    <ion-input [(ngModel)]="userdata.password" type="password"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input [(ngModel)]="userdata.password" type="password"></ion-input>
+      </ion-item>
 
-  
-  <ion-item>
-    <ion-label>Rôle</ion-label>
-  </ion-item>
- 
-  
-  <ion-item>
-    <ion-label>Covoitureur</ion-label>
-    <ion-checkbox slot="start" [(ngModel)]="userdata.isCovoitureur"></ion-checkbox>
-  </ion-item>
-  <ion-button expand="block" (click)="register()">S'inscrire</ion-button>
 
+      <ion-item>
+        <ion-label>Covoitureur</ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="userdata.isCovoitureur"></ion-checkbox>
+      </ion-item>
+
+      <ion-button expand="block" (click)="register()">S'inscrire</ion-button>
+      <a (click)="goToLogin()" class="account-message">
+        Already have an account?
+      </a>
+    </div>
+  </div>
 </ion-content>

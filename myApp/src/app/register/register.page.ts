@@ -30,4 +30,7 @@
         }
       );
     }
+    goToLogin() {
+      this.route.navigate(['/login']); // Redirect to the login page
+    }
   }
