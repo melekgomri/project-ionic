@@ -108,3 +108,14 @@ ion-toolbar {
 .footer-content a:hover {
   text-decoration: underline;
 }
+
+
+ion-button {
+  --background: #ff5722; 
+  --color: white; 
+  border-radius: 5px; 
+}
+
+ion-button:active {
+  --background: #e64a19; 
+}
