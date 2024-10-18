@@ -46,7 +46,11 @@ const routes: Routes = [
   {
     path: 'utilisteur-list',
     loadChildren: () => import('./utilisteur-list/utilisteur-list.module').then( m => m.UtilisteurListPageModule)
+  },  {
+    path: 'list-trajet-covoitureur',
+    loadChildren: () => import('./list-trajet-covoitureur/list-trajet-covoitureur.module').then( m => m.ListTrajetCovoitureurPageModule)
   }
+
 ];
 
 @NgModule({

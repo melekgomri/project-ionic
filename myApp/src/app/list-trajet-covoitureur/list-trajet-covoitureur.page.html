@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mes Trajets</ion-title>
+    <!-- Plus Icon Button in the Toolbar -->
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateToAddTrajetPage()">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="trajets && trajets.length > 0; else noTrajetsMessage">
+    <ion-item *ngFor="let trajet of trajets">
+      <ion-label>
+        <h2>De: {{ trajet.depart }} à: {{ trajet.arrive }}</h2>
+        <p>Date de départ: {{ trajet.datedepart | date: 'short' }}</p>
+        <p>Places disponibles: {{ trajet.placedisponible }}</p>
+        <p>Coût: {{ trajet.cout }} €</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Message displayed if no trajets are found -->
+  <ng-template #noTrajetsMessage>
+    <div class="no-trajets">
+      <p>Aucun trajet trouvé pour cet utilisateur.</p>
+    </div>
+  </ng-template>
+</ion-content>

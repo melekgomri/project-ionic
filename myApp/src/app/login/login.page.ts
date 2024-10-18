@@ -27,7 +27,7 @@ export class LoginPage  {
         console.log('isAdmin:', response.isAdmin);
 
         if (response.isCovoitureur === true && response.isAdmin === false) {
-          this.router.navigate(['/trajet']);  
+          this.router.navigate(['/list-trajet-covoitureur']);  
         } else if (response.isCovoitureur === false && response.isAdmin === false) {
           this.router.navigate(['/list-trajet']);  
         } else {

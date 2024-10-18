@@ -30,4 +30,8 @@ export class TrajetService {
   deletetrajet(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete/${id}`);
   }
+
+  getTrajetsByUserId(userId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getall/${userId}`);
+  }
 }
