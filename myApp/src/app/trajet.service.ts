@@ -34,4 +34,8 @@ export class TrajetService {
   getTrajetsByUserId(userId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/getall/${userId}`);
   }
+
+  getTrajetsById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getbyid/${id}`);
+  }
 }

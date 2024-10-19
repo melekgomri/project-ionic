@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./list-trajet/list-trajet.module').then( m => m.ListTrajetPageModule)
   },
   {
-    path: 'add-delete-reservation',
+    path: 'add-delete-reservation/:id',
     loadChildren: () => import('./add-reservation/add-delete-reservation.module').then( m => m.AddDeleteReservationPageModule)
   },
   {
@@ -46,7 +46,8 @@ const routes: Routes = [
   {
     path: 'utilisteur-list',
     loadChildren: () => import('./utilisteur-list/utilisteur-list.module').then( m => m.UtilisteurListPageModule)
-  },  {
+  },
+  {
     path: 'list-trajet-covoitureur',
     loadChildren: () => import('./list-trajet-covoitureur/list-trajet-covoitureur.module').then( m => m.ListTrajetCovoitureurPageModule)
   }

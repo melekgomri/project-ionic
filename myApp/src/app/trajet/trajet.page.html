@@ -22,8 +22,13 @@
     </ion-item>
     <ion-item>
       <ion-label>Date de départ</ion-label>
-      <ion-datetime [(ngModel)]="trajet.datedepart" name="datedepart"></ion-datetime>
-    </ion-item>
+      <ion-datetime
+      displayFormat="YYYY-MM-DD"
+      pickerFormat="YYYY-MM-DD"
+      name="datedapart"
+      [(ngModel)]="selectedDate"
+      (ionChange)="onDateChange($event)">
+    </ion-datetime>    </ion-item>
     <ion-item>
       <ion-label>Places disponibles</ion-label>
       <ion-input [(ngModel)]="trajet.placedisponible" name="placedisponible"></ion-input>

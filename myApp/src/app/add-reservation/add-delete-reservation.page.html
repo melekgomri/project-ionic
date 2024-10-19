@@ -1,11 +1,10 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Reservation</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- Formulaire pour ajouter une nouvelle réservation -->
   <ion-item>
     <ion-label position="floating">Date</ion-label>
     <ion-datetime [(ngModel)]="reservationData.date"></ion-datetime>
@@ -33,6 +32,29 @@
 
   <ion-button expand="block" (click)="addReservation()">Add Reservation</ion-button>
 
-  <!-- Liste des réservations -->
 
+</ion-content> -->
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Trajet Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="trajet">
+  <!-- Display trajet details -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ trajet.name }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>ID: </strong>{{ trajet._id }}</p>
+      <p><strong>Destination: </strong>{{ trajet.place }}</p>
+      <p><strong>Departure: </strong>{{ trajet.depart }}</p>
+      <p><strong>Date: </strong>{{ trajet.datedapart   }}</p>
+      <!-- Add other relevant details as needed -->
+    </ion-card-content>
+  </ion-card>
 </ion-content>

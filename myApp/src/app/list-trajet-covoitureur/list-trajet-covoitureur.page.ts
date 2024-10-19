@@ -31,11 +31,11 @@ export class ListTrajetCovoitureurPage implements OnInit {
         }
       );
     } else {
-      console.error('No user ID found in local storage.'); // Log if no user ID is found
+      console.error('No user ID found in local storage.'); 
     }
   }
 
   navigateToAddTrajetPage() {
-    this.router.navigate(['/trajet']); // Replace with your add trajet route
+    this.router.navigate(['/trajet']); 
   }
 }

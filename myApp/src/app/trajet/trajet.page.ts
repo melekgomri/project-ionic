@@ -13,30 +13,36 @@ export class TrajetPage {
     place: '',
     depart: '',
     arrive: '',
-    datedepart: '',
+    datedapart: new Date(),  // Initialize as Date object
     placedisponible: '',
     cout: '',
     conducteur: ''
   };
 
-  trajetId: string = '';
+  selectedDate: string;  // Declare selectedDate as a string
 
-  constructor(private trajetService: TrajetService, private alertController: AlertController) {}
+  constructor(private trajetService: TrajetService, private alertController: AlertController) {
+    this.selectedDate = new Date().toISOString();
+  }
+
+  onDateChange(event: any) {
+    this.trajet.datedapart = new Date(event.detail.value);  // Convert to Date object
+  }
 
   async addTrajet() {
-    // Retrieve 'conducteur' ID from localStorage
-    const conducteurId = localStorage.getItem('id'); // Ensure 'id' is the key you used when storing it
+    const conducteurId = localStorage.getItem('id');
     if (conducteurId) {
-      this.trajet.conducteur = conducteurId; // Assign it to 'conducteur'
-      
-      // Now proceed with adding the trajet
+      this.trajet.conducteur = conducteurId;
+      console.log('Trajet Date:', this.trajet.datedapart); 
+      this.trajet.datedapart = new Date(this.selectedDate); // Should be a Date object
+
       this.trajetService.addtrajet(this.trajet).subscribe(
         async (response) => {
           console.log('Trajet added:', response);
           await this.presentAlert('Succès', 'Le trajet a été ajouté avec succès !');
         },
         async (error) => {
-          console.log('Error adding trajet:', error);
+          console.error('Error adding trajet:', error);
           await this.presentAlert('Erreur', 'Une erreur est survenue lors de l\'ajout du trajet.');
         }
       );
