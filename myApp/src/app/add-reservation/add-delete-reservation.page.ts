@@ -72,7 +72,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TrajetService } from '../trajet.service'
+import { TrajetService } from '../trajet.service';
+import { ReservationService } from '../reservation.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-delete-reservation',
@@ -81,27 +83,86 @@ import { TrajetService } from '../trajet.service'
 })
 export class AddDeleteReservationPage implements OnInit {
   trajet: any; // To store trajet details
+  reservationData = {
+    date: '',
+    passager: '', // Will be set from local storage
+    trajet: '',   // To be set from URL param
+    confirmed: false,
+    cancelled: false,
+  };
 
-  constructor(private route: ActivatedRoute, private trajetService: TrajetService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private trajetService: TrajetService,
+    private reservationService: ReservationService,
+    private alertController: AlertController // Inject AlertController
+  ) {}
 
   ngOnInit() {
     // Grab the 'id' from the route parameters
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const trajetId = params.get('id');
-      
+
       if (trajetId) {
         this.loadTrajetDetails(trajetId); // Load trajet details using the ID
       }
     });
   }
-
+  getPassengerId() {
+    // Retrieve passenger ID from local storage
+     const passagerId = localStorage.getItem('id') || '';
+     return passagerId; // Adjust this key as per your local storage implementation
+  }
   // Fetch trajet details by ID using the service
   loadTrajetDetails(id: string) {
-    this.trajetService.getTrajetsById(id).subscribe(trajetDetails => {
-      this.trajet = trajetDetails;
-    }, error => {
-      console.error('Error fetching trajet details', error);
+    this.trajetService.getTrajetsById(id).subscribe(
+      (trajetDetails) => {
+        this.trajet = trajetDetails;
+        this.reservationData.trajet = trajetDetails._id; // Set the trajet ID for the reservation
+        this.reservationData.date = trajetDetails.datedapart; // Set the date from trajet details
+        this.reservationData.passager = localStorage.getItem('passagerId') || ''; // Get passenger ID from local storage
+      },
+      (error) => {
+        console.error('Error fetching trajet details', error);
+      }
+    );
+  }
+
+  addReservation() {
+    this.reservationData.passager = this.getPassengerId();
+    this.reservationService.addreservation(this.reservationData).subscribe(
+      async (response) => {
+        console.log('Reservation added:', response);
+        await this.presentAlert('Reservation Added', 'Your reservation has been successfully added.');
+        this.resetReservationData(); // Reset reservation data after successful addition
+      },
+      (error) => {
+        console.log('Error adding reservation:', error);
+        this.presentAlert('Error', 'There was an error adding your reservation. Please try again.');
+      }
+    );
+  }
+
+  // Function to display alerts
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK'],
     });
+    await alert.present();
+  }
+
+  // Reset reservation data
+  resetReservationData() {
+    this.reservationData = {
+      date: '',
+      passager: localStorage.getItem('passagerId') || '', // Ensure passenger ID is still in place
+      trajet: '',
+      confirmed: false,
+      cancelled: false,
+    };
   }
 }
+
 

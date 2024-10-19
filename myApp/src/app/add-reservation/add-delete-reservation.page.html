@@ -1,44 +1,6 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Reservation</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-item>
-    <ion-label position="floating">Date</ion-label>
-    <ion-datetime [(ngModel)]="reservationData.date"></ion-datetime>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Passager ID</ion-label>
-    <ion-input [(ngModel)]="reservationData.passager"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Trajet</ion-label>
-    <ion-input [(ngModel)]="reservationData.trajet"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Confirmed</ion-label>
-    <ion-checkbox [(ngModel)]="reservationData.confirmed"></ion-checkbox>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Cancelled</ion-label>
-    <ion-checkbox [(ngModel)]="reservationData.cancelled"></ion-checkbox>
-  </ion-item>
-
-  <ion-button expand="block" (click)="addReservation()">Add Reservation</ion-button>
-
-
-</ion-content> -->
-
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Trajet Details</ion-title>
+    <ion-title>Réservation</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -52,9 +14,38 @@
     <ion-card-content>
       <p><strong>ID: </strong>{{ trajet._id }}</p>
       <p><strong>Destination: </strong>{{ trajet.place }}</p>
-      <p><strong>Departure: </strong>{{ trajet.depart }}</p>
-      <p><strong>Date: </strong>{{ trajet.datedapart   }}</p>
-      <!-- Add other relevant details as needed -->
+      <p><strong>Départ: </strong>{{ trajet.depart }}</p>
+      <p><strong>Arrivée: </strong>{{ trajet.arrive }}</p>
+      <p><strong>Date: </strong>{{ trajet.datedapart }}</p>
+      <p><strong>Coût: </strong>{{ trajet.cout }}</p>
+      <p><strong>Conducteur: </strong>{{ trajet.conducteur.name }}</p>
+      <p><strong>Email: </strong>{{ trajet.conducteur.email }}</p>
+
+      <form (ngSubmit)="addReservation()">
+        <ion-item>
+          <ion-label position="floating">Date de départ</ion-label>
+          <ion-datetime 
+          [(ngModel)]="reservationData.date" 
+          name="date" 
+          [value]="trajet.datedapart" 
+          readonly 
+          displayFormat="MMMM DD, YYYY" 
+          pickerFormat="MMMM DD, YYYY" 
+        ></ion-datetime>
+        </ion-item>
+
+        <!-- <ion-item>
+          <ion-label position="floating">Passager ID</ion-label>
+          <ion-input type="text" [(ngModel)]="reservationData.passager" name="passager" [value]="getPassengerId()" readonly></ion-input>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label position="floating">Trajet ID</ion-label>
+          <ion-input type="text" [(ngModel)]="reservationData.trajet" name="trajet" [value]="trajet._id" readonly></ion-input>
+        </ion-item>
+
+        <ion-button expand="full" type="submit">Ajouter Réservation</ion-button>
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>
