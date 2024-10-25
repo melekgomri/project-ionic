@@ -1,0 +1,63 @@
+ion-toolbar{
+    background-color: #ff5722;
+    color: white;
+}
+ion-list {
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    
+    ion-item {
+ 
+      border-radius: 8px;
+      margin-left: 5px;
+      padding: 5px;
+      
+  
+      &:hover {
+        background-color: #e7e9ed;
+      }
+      
+      ion-label {
+        color: #333;
+        font-size: 1rem;
+  
+        h2 {
+          font-weight: bold;
+          color: #ff5722; // Accent color for titles
+          margin-bottom: 4px;
+        }
+  
+        p {
+          font-size: 0.9rem;
+          color: #666;
+        }
+      }
+    }
+  
+    .no-trajets {
+      text-align: center;
+      font-size: 1rem;
+      color: #888;
+      padding: 20px;
+    }
+  }
+
+
+  
+//   ion-tab-button {
+//     --color-selected: #4CAF50; 
+//   }
+  
+  ion-tab-button[tab="mes-trajets"] {
+    --color-selected: #FF5733; 
+  }
+  
+  ion-tab-button[tab="radio"] {
+    --color-selected: #FF5733; 
+  }
+  
+  ion-tab-button[tab="library"] {
+    --color-selected: #FF5733; /* Custom color for the "Library" tab */
+  }
+  

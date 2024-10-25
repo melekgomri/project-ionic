@@ -1,7 +1,6 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="secondry">
     <ion-title>Mes Trajets</ion-title>
-    <!-- Plus Icon Button in the Toolbar -->
     <ion-buttons slot="end">
       <ion-button (click)="navigateToAddTrajetPage()">
         <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
@@ -9,22 +8,61 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-list *ngIf="trajets && trajets.length > 0; else noTrajetsMessage">
-    <ion-item *ngFor="let trajet of trajets">
-      <ion-label>
-        <h2>De: {{ trajet.depart }} à: {{ trajet.arrive }}</h2>
-        <p>Date de départ: {{ trajet.datedepart | date: 'short' }}</p>
-        <p>Places disponibles: {{ trajet.placedisponible }}</p>
-        <p>Coût: {{ trajet.cout }} €</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
 
-  <!-- Message displayed if no trajets are found -->
-  <ng-template #noTrajetsMessage>
-    <div class="no-trajets">
-      <p>Aucun trajet trouvé pour cet utilisateur.</p>
-    </div>
-  </ng-template>
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <!-- "Mes Trajets" Tab -->
+      <ion-tab-button tab="mes-trajets">
+        <ion-icon name="car"></ion-icon>
+        <ion-label>Mes Trajets</ion-label>
+      </ion-tab-button>
+
+      <!-- Radio Tab -->
+      <ion-tab-button tab="radio">
+        <ion-icon name="radio"></ion-icon>
+        <ion-label>Radio</ion-label>
+      </ion-tab-button>
+
+      <!-- Library Tab -->
+      <ion-tab-button tab="library">
+        <ion-icon name="library"></ion-icon>
+        <ion-label>Library</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+    <!-- Content for Each Tab -->
+    <ion-tab tab="mes-trajets">
+      <ion-content>
+        <ion-list *ngIf="trajets && trajets.length > 0; else noTrajetsMessage">
+          <ion-item *ngFor="let trajet of trajets">
+            <ion-label>
+              <h2> {{ trajet.place }} </h2>
+              <p>De {{ trajet.depart }} à {{ trajet.arrive }}</p>
+              <p>Date de départ: {{ trajet.datedapart | date: 'short' }}</p>
+              <p>Places disponibles: {{ trajet.placedisponible }}</p>
+              <p>Coût: {{ trajet.cout }} DT</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ng-template #noTrajetsMessage>
+          <div class="no-trajets">
+            <p>Aucun trajet trouvé pour cet utilisateur.</p>
+          </div>
+        </ng-template>
+      </ion-content>
+    </ion-tab>
+
+    <ion-tab tab="radio">
+      <ion-content>
+        <div class="example-content">Radio content</div>
+      </ion-content>
+    </ion-tab>
+
+    <ion-tab tab="library">
+      <ion-content>
+        <div class="example-content">Library content</div>
+      </ion-content>
+    </ion-tab>
+  </ion-tabs>
 </ion-content>
