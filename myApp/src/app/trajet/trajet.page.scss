@@ -1,4 +1,7 @@
-
+ion-toolbar {
+  background-color: #ff5722;
+  color: white;
+}
 ion-content {
     --background: #fff;
     padding: 16px;
@@ -15,12 +18,31 @@ ion-content {
           font-weight: bold;
         }
   
-        ion-input,
-        ion-datetime {
+        ion-input{
           --background: transparent;
           color: #333;
           padding-left: 10px;
         }
+        ion-datetime{
+          color: #ff5722;
+        }
+        ion-datetime::part(calendar-day) {
+          color: black;
+        }
+        
+      
+        
+        ion-datetime::part(calendar-day):focus {
+          background-color: rgb(154 209 98 / 0.2);
+          box-shadow: 0px 0px 0px 4px rgb(154 209 98 / 0.2);
+        }
+        
+  
+        
+     
+        
+        
+
       }
   
       ion-button {

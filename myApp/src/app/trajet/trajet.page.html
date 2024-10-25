@@ -1,8 +1,8 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="secondary">
+<ion-header>
+  <ion-toolbar color="secondry">
  
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/list-trajet-covoitureur"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -21,8 +21,10 @@
       <ion-input [(ngModel)]="trajet.arrive" name="arrive"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Date de départ</ion-label>
+      <ion-label>Date</ion-label>
       <ion-datetime
+      color = "secondry"
+      presentation="date"
       displayFormat="YYYY-MM-DD"
       pickerFormat="YYYY-MM-DD"
       name="datedapart"
