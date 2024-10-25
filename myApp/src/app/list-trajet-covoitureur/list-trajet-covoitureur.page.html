@@ -18,16 +18,14 @@
         <ion-label>Mes Trajets</ion-label>
       </ion-tab-button>
 
-      <!-- Radio Tab -->
-      <ion-tab-button tab="radio">
-        <ion-icon name="radio"></ion-icon>
-        <ion-label>Radio</ion-label>
+      <ion-tab-button tab="reservation">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Reservation</ion-label>
       </ion-tab-button>
 
-      <!-- Library Tab -->
-      <ion-tab-button tab="library">
-        <ion-icon name="library"></ion-icon>
-        <ion-label>Library</ion-label>
+      <ion-tab-button tab="profile">
+        <ion-icon name="person-circle"></ion-icon> 
+        <ion-label>Profile</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
 
@@ -53,15 +51,24 @@
       </ion-content>
     </ion-tab>
 
-    <ion-tab tab="radio">
+    <ion-tab tab="reservation">
       <ion-content>
-        <div class="example-content">Radio content</div>
+        <div class="example-content">
+          <h2>Reservation</h2>
+          <!-- Reservation content goes here -->
+          <p>Your reservations and details will appear here.</p>
+        </div>
       </ion-content>
     </ion-tab>
-
-    <ion-tab tab="library">
+    
+    <!-- Profile Tab -->
+    <ion-tab tab="profile">
       <ion-content>
-        <div class="example-content">Library content</div>
+        <div class="example-content">
+          <h2>Profile</h2>
+          <!-- Profile content goes here -->
+          <p>Your personal profile information will appear here.</p>
+        </div>
       </ion-content>
     </ion-tab>
   </ion-tabs>
