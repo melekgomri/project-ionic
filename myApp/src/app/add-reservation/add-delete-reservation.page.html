@@ -20,6 +20,7 @@
       <p><strong>Coût: </strong>{{ trajet.cout }}</p>
       <p><strong>Conducteur: </strong>{{ trajet.conducteur.name }}</p>
       <p><strong>Email: </strong>{{ trajet.conducteur.email }}</p>
+      <p><strong>Covoi ID : </strong>{{ trajet.conducteur._id }}</p>
 
       <form (ngSubmit)="addReservation()">
         <ion-item>

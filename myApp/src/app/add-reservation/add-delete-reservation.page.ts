@@ -86,7 +86,8 @@ export class AddDeleteReservationPage implements OnInit {
   reservationData = {
     date: '',
     passager: '', // Will be set from local storage
-    trajet: '',   // To be set from URL param
+    trajet: '',
+    covoitureur: '',   
     confirmed: false,
     cancelled: false,
   };
@@ -121,6 +122,7 @@ export class AddDeleteReservationPage implements OnInit {
         this.reservationData.trajet = trajetDetails._id; // Set the trajet ID for the reservation
         this.reservationData.date = trajetDetails.datedapart; // Set the date from trajet details
         this.reservationData.passager = localStorage.getItem('passagerId') || ''; // Get passenger ID from local storage
+        this.reservationData.covoitureur = trajetDetails.conducteur?._id || '';
       },
       (error) => {
         console.error('Error fetching trajet details', error);
@@ -159,6 +161,7 @@ export class AddDeleteReservationPage implements OnInit {
       date: '',
       passager: localStorage.getItem('passagerId') || '', // Ensure passenger ID is still in place
       trajet: '',
+      covoitureur: '',
       confirmed: false,
       cancelled: false,
     };
