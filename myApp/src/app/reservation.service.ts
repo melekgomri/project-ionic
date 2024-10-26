@@ -30,4 +30,8 @@ export class ReservationService {
   deletereservation(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete/${id}`);
   }
+
+  getReservationByCovoitureurId(id: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/covoitureur/${id}`)
+  }
 }

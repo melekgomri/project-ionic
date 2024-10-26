@@ -54,12 +54,42 @@
     <ion-tab tab="reservation">
       <ion-content>
         <div class="example-content">
-          <h2>Reservation</h2>
-          <!-- Reservation content goes here -->
-          <p>Your reservations and details will appear here.</p>
+          <h2 class="res">Réservations</h2>
+          <ion-list *ngIf="reservations && reservations.length > 0; else noReservationsMessage">
+            <ion-item *ngFor="let reservation of reservations" lines="none" class="reservatioItem">
+              <ion-label class="reservation-content">
+                <h3>Direction: {{ reservation.trajet.place }}</h3>
+                <p>Date de départ: {{ reservation.date | date: 'yyyy-MM-dd' }}</p>
+                <p>Nom du passager: {{ reservation.passager.name }} {{ reservation.passager.lastname }}</p>
+                <p>Email: {{ reservation.passager.email }}</p>
+              </ion-label>
+          
+              <ion-buttons slot="end">
+                <ion-button color="success">
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                </ion-button>
+                <ion-button color="danger">
+                  <ion-icon name="close-circle"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-list>
+          
+          <ng-template #noReservationsMessage>
+            <ion-item>
+              <ion-label>Aucune réservation trouvée.</ion-label>
+            </ion-item>
+          </ng-template>
+          
+          <ng-template #noReservationsMessage>
+            <div class="no-reservations">
+              <p>Aucune réservation .</p>
+            </div>
+          </ng-template>
         </div>
       </ion-content>
     </ion-tab>
+    
     
     <!-- Profile Tab -->
     <ion-tab tab="profile">

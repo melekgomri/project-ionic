@@ -53,11 +53,31 @@ ion-list {
     --color-selected: #FF5733; 
   }
   
-  ion-tab-button[tab="radio"] {
+  ion-tab-button[tab="reservation"] {
     --color-selected: #FF5733; 
   }
   
-  ion-tab-button[tab="library"] {
+  ion-tab-button[tab="profile"] {
     --color-selected: #FF5733; /* Custom color for the "Library" tab */
+  }
+
+  ion-label p {
+    display: flex;
+    align-items: center;
+  }
+  
+  .reservation-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .reservatioItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; // Aligns the content vertically in the center
+  }
+  
+  .res{
+    margin-left: 30px;
   }
   
