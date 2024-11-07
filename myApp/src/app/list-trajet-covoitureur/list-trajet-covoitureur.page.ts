@@ -64,5 +64,32 @@ export class ListTrajetCovoitureurPage implements OnInit {
       console.error('No covoitureur ID found in local storage.');
     }
   }
+
+
+  deleteTrajet(trajet: any): void {
+    const trajetId = trajet._id;
+    console.log('Deleting trajet with id:', trajetId);
+  
+    if (!trajetId) {
+      console.error('No valid trajet id provided');
+      return; // Exit if no valid id
+    }
+  
+    this.trajetService.deletetrajet(trajetId).subscribe(
+      (response) => {
+        // Handle successful deletion
+        console.log('Trajet deleted successfully', response);
+        
+        // Remove the deleted trajet from the list immediately
+        this.trajets = this.trajets.filter(t => t._id !== trajetId); // Update the list
+        this.loadReservations();
+      },
+      (error) => {
+        // Handle error
+        console.error('Error deleting trajet', error);
+      }
+    );
+  }
+  
   
 }
