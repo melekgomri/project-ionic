@@ -13,20 +13,20 @@ export class TrajetPage {
     place: '',
     depart: '',
     arrive: '',
-    datedapart: new Date(),  // Initialize as Date object
+    datedapart: new Date(),  
     placedisponible: '',
     cout: '',
     conducteur: ''
   };
 
-  selectedDate: string;  // Declare selectedDate as a string
+  selectedDate: string;  
 
   constructor(private trajetService: TrajetService, private alertController: AlertController) {
     this.selectedDate = new Date().toISOString();
   }
 
   onDateChange(event: any) {
-    this.trajet.datedapart = new Date(event.detail.value);  // Convert to Date object
+    this.trajet.datedapart = new Date(event.detail.value);  
   }
 
   async addTrajet() {
@@ -34,7 +34,7 @@ export class TrajetPage {
     if (conducteurId) {
       this.trajet.conducteur = conducteurId;
       console.log('Trajet Date:', this.trajet.datedapart); 
-      this.trajet.datedapart = new Date(this.selectedDate); // Should be a Date object
+      this.trajet.datedapart = new Date(this.selectedDate); 
 
       this.trajetService.addtrajet(this.trajet).subscribe(
         async (response) => {

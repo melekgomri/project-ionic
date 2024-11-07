@@ -24,7 +24,7 @@ ion-list {
   
         h2 {
           font-weight: bold;
-          color: #ff5722; // Accent color for titles
+          color: #ff5722; 
           margin-bottom: 4px;
         }
   
@@ -45,10 +45,7 @@ ion-list {
 
 
   
-//   ion-tab-button {
-//     --color-selected: #4CAF50; 
-//   }
-  
+
   ion-tab-button[tab="mes-trajets"] {
     --color-selected: #FF5733; 
   }
@@ -58,7 +55,7 @@ ion-list {
   }
   
   ion-tab-button[tab="profile"] {
-    --color-selected: #FF5733; /* Custom color for the "Library" tab */
+    --color-selected: #FF5733; 
   }
 
   ion-label p {

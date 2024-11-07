@@ -1,22 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary"> 
+<ion-header>
+  <ion-toolbar style="--background: #e64a19; color: #f2f2f7;">
     <ion-title>Liste des Trajets</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding"> 
-  <ion-list>
-    <ion-item *ngFor="let trajet of trajets" lines="full" [routerLink]="['/add-delete-reservation', trajet._id]">
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #f2f2f7;">
+  <div class="header-banner">
+    <img src="assets/header-image.png" alt="Header Image" />
+  </div>
+
+  <ion-searchbar placeholder="Rechercher un trajet" animated (ionInput)="filterTrajets($event)"></ion-searchbar>
+
+  <ion-list class="trajet-list">
+    <ion-item *ngFor="let trajet of filteredTrajets" lines="full" [routerLink]="['/add-delete-reservation', trajet._id]" class="trajet-item">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle" size="large"></ion-icon>
+      </ion-avatar>
       <ion-label>
-        <h2>{{ trajet.place }} - {{ trajet.depart }}</h2> 
-        <ion-text color="medium"> 
+        <h2>{{ trajet.place }} </h2>
+        <ion-text color="medium">
+          <p>Depart: {{ trajet.depart }} </p>
           <p>Arrivée: {{ trajet.arrive }}</p>
-          <p>Date de départ: {{ trajet.datedapart }}</p>
+          <p>Date: {{ trajet.datedapart | date: 'dd/MM/yyyy' }}</p>
+
           <p>Places disponibles: {{ trajet.placedisponible }}</p>
-          <p>Coût: {{ trajet.cout }} TND</p> 
+          <p>Coût: <strong>{{ trajet.cout }} TND</strong></p>
         </ion-text>
       </ion-label>
-
+      <ion-button slot="end" size="small" style="--background: #e64a19; --color: #ffffff;">
+        Réservé
+      </ion-button>
+      
     </ion-item>
   </ion-list>
 </ion-content>
