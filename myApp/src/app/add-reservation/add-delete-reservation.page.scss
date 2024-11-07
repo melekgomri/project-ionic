@@ -1,0 +1,28 @@
+
+  .card-shadow {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px;
+  }
+
+  ion-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  ion-text h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e64a19;
+  }
+  ion-col p { 
+    color: black;
+    font-weight: bold;
+   
+  }
+
+
+  ion-button.submit-button {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    padding: 10px 0;
+  }
