@@ -37,7 +37,7 @@
             <ion-card-content>
               <ion-row>
                 <ion-col size="auto" class="content-left">
-                  <p class="dest">{{ trajet.place }}</p>
+                  <p class="dest">From {{ trajet.from }} to {{ trajet.to }}</p>
                   <p>Heure de départ: {{ trajet.depart }}h </p>
                   <p>Date de départ: {{ trajet.datedapart | date: 'yyyy-MM-dd' }}</p>
                   <p>Places disponibles: {{ trajet.placedisponible }}</p>
@@ -66,18 +66,35 @@
     <ion-tab tab="reservation">
       <ion-content>
         <div class="reservation-content">
-          <h2 class="res">Réservations</h2>
           <div *ngIf="reservations && reservations.length > 0; else noReservationsMessage">
             <ion-card class="reservation-card" *ngFor="let reservation of reservations">
-              <ion-card-header>
-                <ion-card-title>Direction: {{ reservation.trajet.place }}</ion-card-title>
-                <ion-card-subtitle>Date de départ: {{ reservation.date | date: 'yyyy-MM-dd' }}</ion-card-subtitle>
-              </ion-card-header>
+              
               <ion-card-content>
-                <div class="reservatioItem">
-                  <p>Nom du passager: {{ reservation.passager.name }} {{ reservation.passager.lastname }}</p>
+                <ion-row>
+                  <ion-col size="auto" class="rescard">
+               
+                  <p class="dest">From: {{ reservation.trajet.from }} to  {{ reservation.trajet.to }} </p>
+                  <p>Date: {{ reservation.date | date: 'yyyy-MM-dd' }}</p>
+                  <p>Passenger: {{ reservation.passager.name }} {{ reservation.passager.lastname }}</p>
                   <p>Email: {{ reservation.passager.email }}</p>
-                </div>
+                  <p>Phone: {{reservation.passager.phone}}</p>
+                </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="ion-text-center">
+                   
+                    <ion-button color="success" (click)="confirmReservation(reservation._id)">
+                      <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+                      Approve
+                    </ion-button>
+                  </ion-col>
+                  <ion-col class="ion-text-center">
+                    <ion-button color="danger" (click)="cancelReservation(reservation._id)">
+                      <ion-icon slot="start" name="close-circle"></ion-icon>
+                      Reject
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
               </ion-card-content>
               <ion-buttons slot="end">
                 <ion-button color="success">

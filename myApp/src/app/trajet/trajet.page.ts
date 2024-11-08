@@ -10,32 +10,50 @@ import { AlertController } from '@ionic/angular';
 export class TrajetPage {
 
   trajet = {
-    place: '',
-    depart: '',
-    arrive: '',
-    datedapart: new Date(),  
+    from: '',
+    to: '',
+    depart: '',  // Changed to store time as a string (e.g., "14:30")
+    datedapart: new Date(),
     placedisponible: '',
     cout: '',
     conducteur: ''
   };
 
-  selectedDate: string;  
+  selectedDate: string;
 
   constructor(private trajetService: TrajetService, private alertController: AlertController) {
     this.selectedDate = new Date().toISOString();
   }
 
   onDateChange(event: any) {
-    this.trajet.datedapart = new Date(event.detail.value);  
+    this.trajet.datedapart = new Date(event.detail.value);
+  }
+
+  // Method to handle time input change for 'depart'
+  onTimeChange(event: any) {
+    const timeString = event.detail.value;  // Extract the time string in "HH:mm" format
+    this.trajet.depart = timeString;  // Store as string, or you could use a Date object if needed
+    console.log('Time selected:', this.trajet.depart);  // For debugging
   }
 
   async addTrajet() {
     const conducteurId = localStorage.getItem('id');
     if (conducteurId) {
       this.trajet.conducteur = conducteurId;
-      console.log('Trajet Date:', this.trajet.datedapart); 
-      this.trajet.datedapart = new Date(this.selectedDate); 
-
+  
+      // Ensure the date format is set correctly
+      if (this.selectedDate) {
+        this.trajet.datedapart = new Date(this.selectedDate);
+      }
+  
+      // If the database expects Date objects for both date and time:
+      if (this.trajet.depart) {
+        const [hours, minutes] = this.trajet.depart.split(':');
+        const dateObj = new Date(this.trajet.datedapart);  // Start with the date selected
+        dateObj.setHours(Number(hours), Number(minutes));  // Set the time based on the input
+        this.trajet.datedapart = dateObj;  // Combine date and time in a single Date object
+      }
+  
       this.trajetService.addtrajet(this.trajet).subscribe(
         async (response) => {
           console.log('Trajet added:', response);

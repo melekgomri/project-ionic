@@ -19,33 +19,33 @@
     <ion-card-content>
       <ion-grid>
         <!-- Display Trajet Details in Rows -->
-        <ion-row>
-          <ion-col size="6">
-            <ion-text color="primary">
-              <h3>Destination</h3>
-            </ion-text>
-            <p>{{ trajet.place }}</p>
-          </ion-col>
-          <ion-col size="6">
-            <ion-text color="primary">
-              <h3>Départ</h3>
-            </ion-text>
-            <p>{{ trajet.depart }}</p>
-          </ion-col>
-        </ion-row>
 
         <ion-row>
           <ion-col size="6">
             <ion-text color="primary">
-              <h3>Arrivée</h3>
+              <h3>From</h3>
             </ion-text>
-            <p>{{ trajet.arrive }}</p>
+            <p>{{ trajet.from }}</p>
           </ion-col>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>To</h3>
+            </ion-text>
+            <p>{{ trajet.to }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col size="6">
             <ion-text color="primary">
               <h3>Date</h3>
             </ion-text>
-            <p>{{ trajet.datedapart | date:'shortDate' }}</p>
+            <p>{{ trajet.datedapart | date:'MMMM dd, yyyy' }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>Departure</h3>
+            </ion-text>
+            <p>{{ trajet.depart }}</p>
           </ion-col>
         </ion-row>
 
@@ -73,9 +73,9 @@
           </ion-col>
           <ion-col size="6">
             <ion-text color="primary">
-              <h3>Date</h3>
+              <h3>Phone</h3>
             </ion-text>
-            <p>{{ trajet.datedapart | date:'MMMM dd, yyyy' }}</p>
+            <p>{{ trajet.conducteur.phone}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>

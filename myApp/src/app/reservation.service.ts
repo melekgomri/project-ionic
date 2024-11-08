@@ -11,27 +11,36 @@ export class ReservationService {
 
   constructor(private http: HttpClient) {}
 
-  // Add new contact
+ 
   addreservation(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/addreservation`, data);
   }
 
-  // Get all contacts
+ 
   getreservation(): Observable<any> {
     return this.http.get(`${this.apiUrl}/getall`);
   }
 
-  // Update contact
+ 
   updatereservation(id: string, newdata: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/update/${id}`, newdata);
   }
 
-  // Delete contact
+
   deletereservation(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete/${id}`);
   }
 
   getReservationByCovoitureurId(id: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/covoitureur/${id}`)
+  }
+
+  cancelReservation(id: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/cancel-reservation/${id}`, {}); 
+  
+  }
+  confirmReservation(id: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/confirm-reservation/${id}`, {}); 
+  
   }
 }

@@ -12,9 +12,9 @@ export class ListTrajetPage implements OnInit {
   constructor(private  trajetService: TrajetService) { }
 
   ngOnInit() {
-    this.getallcontacts();
+    this.getalltrajets();
   }
-  getallcontacts() {
+  getalltrajets() {
     this.trajetService.getAlltrajet().subscribe(
       (data) => {
         this.trajets = data;

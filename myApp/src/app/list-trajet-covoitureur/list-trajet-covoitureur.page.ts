@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TrajetService } from '../trajet.service'; 
 import { ReservationService } from '../reservation.service';
 import { Router } from '@angular/router'; 
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-list-trajet-covoitureur',
@@ -15,7 +17,8 @@ export class ListTrajetCovoitureurPage implements OnInit {
 
   constructor(private trajetService: TrajetService ,
      private router: Router,
-     private reservationService : ReservationService
+     private reservationService : ReservationService,
+     private alertController: AlertController
     ) { }
 
   ngOnInit() {
@@ -90,6 +93,43 @@ export class ListTrajetCovoitureurPage implements OnInit {
       }
     );
   }
+  cancelReservation(id: string) {
+    this.reservationService.cancelReservation(id).subscribe(
+      async (response) => {
+        console.log('Reservation canceled:', response);
+        await this.presentAlert('Succès', 'La réservation a été annulée avec succès !');
+      },
+      async (error) => {
+        console.error('Error canceling reservation:', error);
+        await this.presentAlert('Erreur', 'Une erreur est survenue lors de l\'annulation de la réservation.');
+      }
+    );
+  }
+
+  // Method to handle reservation confirmation
+  confirmReservation(id: string) {
+    this.reservationService.confirmReservation(id).subscribe(
+      async (response) => {
+        console.log('Reservation confirmed:', response);
+        await this.presentAlert('Succès', 'La réservation a été confirmée avec succès !');
+        // Optionally, update the UI to reflect the new available places
+      },
+      async (error) => {
+        console.error('Error confirming reservation:', error);
+        await this.presentAlert('Erreur', 'Une erreur est survenue lors de la confirmation de la réservation.');
+      }
+    );
+  }
+  
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   
   
 }

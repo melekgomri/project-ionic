@@ -13,6 +13,7 @@
       lastname:'',
       email:'',
       password:'',
+      phone:'',
      // isAdmin: false,
       isCovoitureur: false
     };

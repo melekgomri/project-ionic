@@ -35,17 +35,18 @@ ion-tab-button[tab="profile"] {
   --color-selected: #FF5733;
 }
 
-.reservation-content {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
+// .reservation-content {
+//   display: flex;
+//   flex-direction: column;
+//   padding: 20px;
+// }
 
-.reservatioItem {
-  display: flex;
-  justify-content: space-between;
+.rescard {
+  
+ // justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  width: 300px;
 }
 
 .res {
