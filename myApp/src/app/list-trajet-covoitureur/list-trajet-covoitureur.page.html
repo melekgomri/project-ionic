@@ -83,13 +83,18 @@
                 <ion-row>
                   <ion-col class="ion-text-center">
                    
-                    <ion-button color="success" (click)="confirmReservation(reservation._id)">
+                    <ion-button 
+                    color="success" 
+                    [disabled]="reservationStatus === 'confirmed' || reservationStatus === 'rejected'"
+                    (click)="confirmReservation(reservation._id)">
                       <ion-icon slot="start" name="checkmark-circle"></ion-icon>
                       Approve
                     </ion-button>
                   </ion-col>
                   <ion-col class="ion-text-center">
-                    <ion-button color="danger" (click)="cancelReservation(reservation._id)">
+                    <ion-button color="danger" 
+                    [disabled]="reservationStatus === 'confirmed' || reservationStatus === 'rejected'"
+                    (click)="cancelReservation(reservation._id)">
                       <ion-icon slot="start" name="close-circle"></ion-icon>
                       Reject
                     </ion-button>

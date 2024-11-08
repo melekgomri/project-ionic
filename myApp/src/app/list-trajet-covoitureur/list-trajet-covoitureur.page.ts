@@ -14,6 +14,7 @@ export class ListTrajetCovoitureurPage implements OnInit {
   trajets: any[] = []; 
   reservations: any[] = [];
   covoitureurId : string | null = null;
+  reservationStatus: string = '';
 
   constructor(private trajetService: TrajetService ,
      private router: Router,
@@ -97,6 +98,7 @@ export class ListTrajetCovoitureurPage implements OnInit {
     this.reservationService.cancelReservation(id).subscribe(
       async (response) => {
         console.log('Reservation canceled:', response);
+        this.reservationStatus = 'rejected';
         await this.presentAlert('Succès', 'La réservation a été annulée avec succès !');
       },
       async (error) => {
@@ -107,20 +109,22 @@ export class ListTrajetCovoitureurPage implements OnInit {
   }
 
   // Method to handle reservation confirmation
-  confirmReservation(id: string) {
-    this.reservationService.confirmReservation(id).subscribe(
-      async (response) => {
-        console.log('Reservation confirmed:', response);
-        await this.presentAlert('Succès', 'La réservation a été confirmée avec succès !');
-        // Optionally, update the UI to reflect the new available places
-      },
-      async (error) => {
-        console.error('Error confirming reservation:', error);
-        await this.presentAlert('Erreur', 'Une erreur est survenue lors de la confirmation de la réservation.');
-      }
-    );
-  }
-  
+confirmReservation(id: string) {
+  this.reservationService.confirmReservation(id).subscribe(
+    async (response) => {
+      console.log('Reservation confirmed:', response);
+      this.reservationStatus = 'confirmed';
+      await this.presentAlert('Succès', 'La réservation a été confirmée avec succès !');
+      // Optionally, update the UI to reflect the new available places
+      this.getTrajets()
+    },
+    async (error) => {
+      console.error('Error confirming reservation:', error);
+      await this.presentAlert('Erreur', 'Une erreur est survenue lors de la confirmation de la réservation.');
+    }
+  );
+}
+
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,

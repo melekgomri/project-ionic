@@ -40,7 +40,7 @@ export class ReservationService {
   
   }
   confirmReservation(id: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/confirm-reservation/${id}`, {}); 
+    return this.http.patch(`${this.apiUrl}/confirm-reservation/${id}`, {}); 
   
   }
 }
