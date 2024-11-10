@@ -45,6 +45,9 @@ export class ListTrajetCovoitureurPage implements OnInit {
       );
     }
   }
+  goToUpdateProfile() {
+    this.router.navigate(['/update-profile']);
+  }
   updateUserProfile() {
     const userId = localStorage.getItem('id');
     if (userId) {

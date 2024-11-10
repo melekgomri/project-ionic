@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mettre à jour le Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="updateProfile()">
+    <ion-item>
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input [(ngModel)]="userProfile.nom" name="nom" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="userProfile.email" name="email" type="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Téléphone</ion-label>
+      <ion-input [(ngModel)]="userProfile.phone" name="phone" type="tel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input [(ngModel)]="userProfile.password" name="password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" color="primary">Mettre à jour</ion-button>
+  </form>
+</ion-content>
