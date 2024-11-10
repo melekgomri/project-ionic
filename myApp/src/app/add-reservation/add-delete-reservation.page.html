@@ -1,51 +1,89 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="--background: #e64a19; color: #f2f2f7;">
+    <ion-buttons slot="start" >
+      <ion-back-button style="color: #f2f2f7;"></ion-back-button>
+    </ion-buttons>
     <ion-title>Réservation</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="trajet">
-  <!-- Display trajet details -->
-  <ion-card>
+  <!-- Trajet Details Card -->
+ 
+  <ion-card class="card-shadow">
+    
     <ion-card-header>
-      <ion-card-title>{{ trajet.name }}</ion-card-title>
+      <ion-card-title>Détails du trajet</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <p><strong>ID: </strong>{{ trajet._id }}</p>
-      <p><strong>Destination: </strong>{{ trajet.place }}</p>
-      <p><strong>Départ: </strong>{{ trajet.depart }}</p>
-      <p><strong>Arrivée: </strong>{{ trajet.arrive }}</p>
-      <p><strong>Date: </strong>{{ trajet.datedapart }}</p>
-      <p><strong>Coût: </strong>{{ trajet.cout }}</p>
-      <p><strong>Conducteur: </strong>{{ trajet.conducteur.name }}</p>
-      <p><strong>Email: </strong>{{ trajet.conducteur.email }}</p>
-      <p><strong>Covoi ID : </strong>{{ trajet.conducteur._id }}</p>
+      <ion-grid>
+        <!-- Display Trajet Details in Rows -->
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>From</h3>
+            </ion-text>
+            <p>{{ trajet.from }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>To</h3>
+            </ion-text>
+            <p>{{ trajet.to }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>Date</h3>
+            </ion-text>
+            <p>{{ trajet.datedapart | date:'MMMM dd, yyyy' }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>Departure</h3>
+            </ion-text>
+            <p>{{ trajet.depart }}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>Coût</h3>
+            </ion-text>
+            <p>{{ trajet.cout }}DT</p>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>Conducteur</h3>
+            </ion-text>
+            <p>{{ trajet.conducteur.name }} {{ trajet.conducteur.lastname }}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>Email</h3>
+            </ion-text>
+            <p>{{ trajet.conducteur.email }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h3>Phone</h3>
+            </ion-text>
+            <p>{{ trajet.conducteur.phone}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
       <form (ngSubmit)="addReservation()">
-        <ion-item>
-          <ion-label position="floating">Date de départ</ion-label>
-          <ion-datetime 
-          [(ngModel)]="reservationData.date" 
-          name="date" 
-          [value]="trajet.datedapart" 
-          readonly 
-          displayFormat="MMMM DD, YYYY" 
-          pickerFormat="MMMM DD, YYYY" 
-        ></ion-datetime>
-        </ion-item>
-
-        <!-- <ion-item>
-          <ion-label position="floating">Passager ID</ion-label>
-          <ion-input type="text" [(ngModel)]="reservationData.passager" name="passager" [value]="getPassengerId()" readonly></ion-input>
-        </ion-item> -->
-
-        <ion-item>
-          <ion-label position="floating">Trajet ID</ion-label>
-          <ion-input type="text" [(ngModel)]="reservationData.trajet" name="trajet" [value]="trajet._id" readonly></ion-input>
-        </ion-item>
-
-        <ion-button expand="full" type="submit">Ajouter Réservation</ion-button>
+        <ion-button expand="full" type="submit" style="--background: #e64a19; color: #f2f2f7;" class="submit-button">
+          Réserver
+        </ion-button>
       </form>
     </ion-card-content>
   </ion-card>
