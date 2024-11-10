@@ -123,13 +123,51 @@
 
     <!-- Profile Tab -->
     <ion-tab tab="profile">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Profile</ion-title>
+          <ion-buttons slot="end">
+            <!-- Bouton de déconnexion -->
+            <ion-button (click)="logout()" color="danger" fill="outline">
+              <ion-icon name="log-out-outline" slot="start"></ion-icon>
+              Déconnexion
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+    
       <ion-content>
-        <div class="example-content">
+        <div class="profile-content">
           <h2>Profile</h2>
-          <p>Your personal profile information will appear here.</p>
+    
+          <ion-item>
+            <ion-label position="floating">Nom</ion-label>
+            <ion-input [(ngModel)]="userProfile.nom"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input [(ngModel)]="userProfile.email"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input [(ngModel)]="userProfile.password" type="password"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label position="floating">Téléphone</ion-label>
+            <ion-input [(ngModel)]="userProfile.phone" type="tel"></ion-input>
+          </ion-item>
+    
+          <ion-button expand="full" color="primary" (click)="goToUpdateProfile()">
+            Mettre à jour le profil
+          </ion-button>
         </div>
       </ion-content>
     </ion-tab>
+    
+    
   </ion-tabs>
 </ion-content>
 

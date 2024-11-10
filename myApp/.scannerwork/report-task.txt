@@ -1,0 +1,6 @@
+projectKey=my-ionic-app
+serverUrl=http://localhost:9000
+serverVersion=10.7.0.96327
+dashboardUrl=http://localhost:9000/dashboard?id=my-ionic-app
+ceTaskId=30c0d2ba-9fe2-4bc5-82c0-de6dc782c6a0
+ceTaskUrl=http://localhost:9000/api/ce/task?id=30c0d2ba-9fe2-4bc5-82c0-de6dc782c6a0
