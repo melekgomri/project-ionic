@@ -16,4 +16,8 @@ export class UtilisateurService {
 deleteutilisateur(id: string): Observable<any> {
   return this.http.delete(`${this.apiurl}/delete/${id}`);
 }
+
+changePwd(id: string  ,newdata: any): Observable<any> {
+  return this.http.put(`${this.apiurl}/change-password/${id}`, newdata);
+}
 }

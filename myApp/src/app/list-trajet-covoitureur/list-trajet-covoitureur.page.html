@@ -1,13 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mes Trajets</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="navigateToAddTrajetPage()" fill="clear">
-        <ion-icon slot="icon-only" name="add-circle-outline" color="light"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
   <ion-tabs>
@@ -29,7 +20,16 @@
     </ion-tab-bar>
 
     <!-- Mes Trajets Tab -->
-    <ion-tab tab="mes-trajets">
+    <ion-tab tab="mes-trajets"><ion-header>
+      <ion-toolbar>
+        <ion-title>Mes Trajets</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="navigateToAddTrajetPage()" fill="clear">
+            <ion-icon slot="icon-only" name="add-circle-outline" color="light"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
       <ion-content>
         <div *ngIf="trajets && trajets.length > 0; else noTrajetsMessage">
           <ion-card class="trajet-card" *ngFor="let trajet of trajets">
@@ -64,6 +64,11 @@
 
     <!-- Reservations Tab -->
     <ion-tab tab="reservation">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Réservations</ion-title>
+        </ion-toolbar>
+      </ion-header>
       <ion-content>
         <div class="reservation-content">
           <div *ngIf="reservations && reservations.length > 0; else noReservationsMessage">
@@ -127,10 +132,8 @@
         <ion-toolbar>
           <ion-title>Profile</ion-title>
           <ion-buttons slot="end">
-            <!-- Bouton de déconnexion -->
-            <ion-button (click)="logout()" color="danger" fill="outline">
+            <ion-button (click)="logout()" color="light">
               <ion-icon name="log-out-outline" slot="start"></ion-icon>
-              Déconnexion
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
@@ -138,34 +141,76 @@
     
       <ion-content>
         <div class="profile-content">
-          <h2>Profile</h2>
+          <h2 style="margin-left: 10px;">Profile</h2>
     
+          <!-- Profile Info Fields -->
           <ion-item>
             <ion-label position="floating">Nom</ion-label>
-            <ion-input [(ngModel)]="userProfile.nom"></ion-input>
+            <ion-input [(ngModel)]="userProfile.name"></ion-input>
           </ion-item>
-    
+          <ion-item>
+            <ion-label position="floating">Prénom</ion-label>
+            <ion-input [(ngModel)]="userProfile.lastname"></ion-input>
+          </ion-item>
           <ion-item>
             <ion-label position="floating">Email</ion-label>
             <ion-input [(ngModel)]="userProfile.email"></ion-input>
           </ion-item>
-    
-          <ion-item>
-            <ion-label position="floating">Password</ion-label>
-            <ion-input [(ngModel)]="userProfile.password" type="password"></ion-input>
-          </ion-item>
-    
           <ion-item>
             <ion-label position="floating">Téléphone</ion-label>
             <ion-input [(ngModel)]="userProfile.phone" type="tel"></ion-input>
           </ion-item>
     
-          <ion-button expand="full" color="primary" (click)="goToUpdateProfile()">
-            Mettre à jour le profil
+          <!-- Save Profile Button -->
+          <ion-button 
+            expand="block" 
+            style="margin: 20px auto; --background: #ff5722; width: 60%;" 
+            (click)="updateUserProfile()">
+            Save Profile
           </ion-button>
+    
+          <!-- Password Change Section -->
+          <ion-button 
+            expand="block" 
+            fill="outline" 
+            style="margin: 10px auto; width: 60%;" 
+            (click)="toggleChangePassword()">
+            Change Password
+          </ion-button>
+    
+          <div *ngIf="showChangePassword" style="margin-top: 20px;">
+            <!-- Old Password Field -->
+            <ion-item>
+              <ion-label position="floating">Old Password</ion-label>
+              <ion-input [(ngModel)]="oldPassword" type="password"></ion-input>
+            </ion-item>
+    
+            <!-- New Password Field -->
+            <ion-item>
+              <ion-label position="floating">New Password</ion-label>
+              <ion-input [(ngModel)]="newPassword" type="password"></ion-input>
+            </ion-item>
+    
+            <!-- Confirm New Password Field -->
+            <ion-item>
+              <ion-label position="floating">Confirm New Password</ion-label>
+              <ion-input [(ngModel)]="confirmNewPassword" type="password"></ion-input>
+            </ion-item>
+    
+            <!-- Save New Password Button -->
+            <ion-button 
+              expand="block" 
+              style="margin: 20px auto; --background: #ff5722; width: 60%;" 
+              (click)="saveNewPassword()">
+              Save New Password
+            </ion-button>
+          </div>
+    
         </div>
       </ion-content>
     </ion-tab>
+    
+    
     
     
   </ion-tabs>

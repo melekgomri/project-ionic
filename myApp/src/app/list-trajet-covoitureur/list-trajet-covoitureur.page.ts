@@ -4,6 +4,7 @@ import { ReservationService } from '../reservation.service';
 import { Router } from '@angular/router'; 
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
+import { UtilisateurService } from '../utilisateur.service';
 
 
 @Component({
@@ -17,12 +18,17 @@ export class ListTrajetCovoitureurPage implements OnInit {
   covoitureurId : string | null = null;
   reservationStatus: string = '';
   userProfile: any = {};
+  oldPassword: string = '';
+  newPassword: string = '';
+  confirmNewPassword: string = '';
+  showChangePassword: boolean = false;
 
   constructor(private trajetService: TrajetService ,
      private router: Router,
      private authService: AuthService,
      private alertController: AlertController,
-     private reservationService : ReservationService
+     private reservationService : ReservationService,
+     private userSer : UtilisateurService
     ) { }
 
   ngOnInit() {
@@ -173,5 +179,58 @@ confirmReservation(id: string) {
   }
 
   
-  
+  async saveNewPassword() {
+    // Validate form inputs
+    if (!this.oldPassword || !this.newPassword || !this.confirmNewPassword) {
+      this.showAlert('Error', 'All password fields are required.');
+      return;
+    }
+
+    if (this.newPassword !== this.confirmNewPassword) {
+      this.showAlert('Error', 'New password and confirm password do not match.');
+      return;
+    }
+
+    // Prepare data for API call
+    const passwordData = {
+      currentPassword: this.oldPassword,
+      newPassword: this.newPassword,
+      confirmPassword: this.confirmNewPassword,
+    };
+
+    // Call the changePwd function from your service
+    const userId = localStorage.getItem('id') || ''; 
+    console.log(userId);
+    this.userSer.changePwd(userId, passwordData).subscribe({
+      next: async (response) => {
+        // Handle successful password change
+        await this.showAlert('Success', 'Password updated successfully.');
+        this.resetPasswordFields();
+      },
+      error: async (error) => {
+        // Handle error response
+        await this.showAlert('Error', error.error.message || 'Password change failed.');
+      },
+    });
+  }
+  toggleChangePassword() {
+    this.showChangePassword = !this.showChangePassword;
+  }
+
+  // Helper function to reset password fields
+  resetPasswordFields() {
+    this.oldPassword = '';
+    this.newPassword = '';
+    this.confirmNewPassword = '';
+    this.showChangePassword = false;
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 }
