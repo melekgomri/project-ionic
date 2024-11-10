@@ -3,6 +3,7 @@ import { TrajetService } from '../trajet.service';
 import { ReservationService } from '../reservation.service';
 import { Router } from '@angular/router'; 
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -15,18 +16,48 @@ export class ListTrajetCovoitureurPage implements OnInit {
   reservations: any[] = [];
   covoitureurId : string | null = null;
   reservationStatus: string = '';
+  userProfile: any = {};
 
   constructor(private trajetService: TrajetService ,
      private router: Router,
-     private reservationService : ReservationService,
-     private alertController: AlertController
+     private authService: AuthService,
+     private alertController: AlertController,
+     private reservationService : ReservationService
     ) { }
 
   ngOnInit() {
     this.covoitureurId = localStorage.getItem('id');
-    this.getTrajets(); 
+    this.getTrajets();
     this.loadReservations();
+    this.loadUserProfile(); // 
 
+  }
+  loadUserProfile() {
+    const userId = localStorage.getItem('id');
+    if (userId) {
+      this.authService.getUserById(userId).subscribe(
+        (response) => {
+          this.userProfile = response;
+        },
+        (error) => {
+          console.error('Error fetching user profile:', error);
+        }
+      );
+    }
+  }
+  updateUserProfile() {
+    const userId = localStorage.getItem('id');
+    if (userId) {
+      this.authService.updateUserProfile(userId, this.userProfile).subscribe(
+        async (response) => {
+          await this.presentAlert('Succès', 'Profile updated successfully');
+        },
+        async (error) => {
+          console.error('Error updating profile:', error);
+          await this.presentAlert('Erreur', 'Error updating profile');
+        }
+      );
+    }
   }
 
   getTrajets() {
@@ -132,6 +163,10 @@ confirmReservation(id: string) {
       buttons: ['OK']
     });
     await alert.present();
+  }
+  logout() {
+    localStorage.removeItem('id'); // Supprimer l'ID de l'utilisateur
+    this.router.navigate(['/login']); // Rediriger vers la page de connexion
   }
 
   
