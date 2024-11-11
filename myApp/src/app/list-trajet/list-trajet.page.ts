@@ -29,14 +29,16 @@ export class ListTrajetPage implements OnInit {
   
   filterTrajets(event: any) {
     const query = event.target.value.toLowerCase();
-
+  
     if (query.trim() === '') {
       this.filteredTrajets = [...this.trajets]; 
     } else {
       this.filteredTrajets = this.trajets.filter(trajet => 
-        trajet.place.toLowerCase().includes(query)
+        trajet.from.toLowerCase().includes(query) || 
+        trajet.to.toLowerCase().includes(query)
       );
     }
   }
+  
 
 }

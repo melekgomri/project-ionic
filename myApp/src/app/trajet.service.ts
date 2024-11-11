@@ -23,7 +23,7 @@ export class TrajetService {
 
   // Update contact
   updatetrajet(id: string, newdata: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update/${id}`, newdata);
+    return this.http.patch(`${this.apiUrl}/update/${id}`, newdata);
   }
 
   // Delete contact

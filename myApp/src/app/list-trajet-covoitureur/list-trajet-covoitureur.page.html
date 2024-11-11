@@ -35,7 +35,7 @@
           <ion-card class="trajet-card" *ngFor="let trajet of trajets">
             
             <ion-card-content>
-              <ion-row>
+              <ion-row class="ion-align-items-center">
                 <ion-col size="auto" class="content-left">
                   <p class="dest">From {{ trajet.from }} to {{ trajet.to }}</p>
                   <p>Heure de départ: {{ trajet.depart }}h </p>
@@ -43,14 +43,22 @@
                   <p>Places disponibles: {{ trajet.placedisponible }}</p>
                   <p>Coût: {{ trajet.cout }} DT</p>
                 </ion-col>
-                
-                <ion-col size="auto" class="content-right">
-                  <ion-button class="trash" fill="clear" (click)="deleteTrajet(trajet)">
-                    <ion-icon  name="trash-outline" color="danger"></ion-icon>
+              </ion-row>
+              <ion-row>
+                <ion-col  class="content-right" >
+                  <ion-button color="danger" class="trash" (click)="deleteTrajet(trajet)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    Supprimer
+                  </ion-button>
+            
+                  <ion-button color="success" class="edit" style="margin-left: 20px;" (click)="editTrajet(trajet)">
+                    <ion-icon name="create-outline"></ion-icon>
+                    Modifier
                   </ion-button>
                 </ion-col>
               </ion-row>
             </ion-card-content>
+            
             
           </ion-card>
         </div>

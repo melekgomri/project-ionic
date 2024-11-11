@@ -13,23 +13,24 @@ export class TrajetPage {
     from: '',
     to: '',
     depart: '',  // Changed to store time as a string (e.g., "14:30")
-    datedapart: new Date(),
+    datedapart: '',
     placedisponible: '',
     cout: '',
     conducteur: ''
   };
 
-  selectedDate: string;
+ // selectedDate: string;
 
   constructor(private trajetService: TrajetService, private alertController: AlertController) {
-    this.selectedDate = new Date().toISOString();
+   // this.selectedDate = new Date().toISOString().split('T')[0];
+   const today = new Date();
+    this.trajet.datedapart = today.toISOString().split('T')[0];
   }
 
   onDateChange(event: any) {
-    this.trajet.datedapart = new Date(event.detail.value);
+    this.trajet.datedapart = event.detail.value;
   }
 
-  // Method to handle time input change for 'depart'
   onTimeChange(event: any) {
     const timeString = event.detail.value;  // Extract the time string in "HH:mm" format
     this.trajet.depart = timeString;  // Store as string, or you could use a Date object if needed
@@ -42,16 +43,16 @@ export class TrajetPage {
       this.trajet.conducteur = conducteurId;
   
       // Ensure the date format is set correctly
-      if (this.selectedDate) {
-        this.trajet.datedapart = new Date(this.selectedDate);
-      }
+      // if (this.selectedDate) {
+      //   this.trajet.datedapart = this.selectedDate;
+      // }
   
       // If the database expects Date objects for both date and time:
       if (this.trajet.depart) {
         const [hours, minutes] = this.trajet.depart.split(':');
         const dateObj = new Date(this.trajet.datedapart);  // Start with the date selected
         dateObj.setHours(Number(hours), Number(minutes));  // Set the time based on the input
-        this.trajet.datedapart = dateObj;  // Combine date and time in a single Date object
+        this.trajet.datedapart = dateObj.toISOString();  // Combine date and time in a single Date object
       }
   
       this.trajetService.addtrajet(this.trajet).subscribe(

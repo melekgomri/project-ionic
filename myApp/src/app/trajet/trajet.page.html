@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="secondry">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button style="color: white;"></ion-back-button>
     </ion-buttons>
@@ -25,6 +25,7 @@
         class="small-datetime"
         type="time"
         [(ngModel)]="trajet.depart"
+        name="depart"
         (ionInput)="onTimeChange($event)">
       </ion-input>
     </ion-item>
@@ -33,11 +34,11 @@
       <ion-label>Date</ion-label>
       <ion-input
         type="date"
-        [(ngModel)]="selectedDate"
+        [(ngModel)]="trajet.datedapart"
+        name="datedepart"
         (ionInput)="onDateChange($event)">
       </ion-input>
     </ion-item>
-    
 
     <ion-item class="form-item">
       <ion-label position="floating">Places disponibles</ion-label>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar  color="secondry">
+    <ion-buttons slot="start">
+      <ion-back-button style="color: white;"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Modifier Trajet</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="updateTrajet()">
+    <ion-item>
+      <ion-label position="floating">From</ion-label>
+      <ion-input [(ngModel)]="updatedTrajet.from" name="from" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">To</ion-label>
+      <ion-input [(ngModel)]="updatedTrajet.to" name="to" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Departure Time</ion-label>
+      <ion-input [(ngModel)]="updatedTrajet.depart" type="time" name="depart"  required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Departure Date</ion-label>
+      <ion-input [(ngModel)]="updatedTrajet.datedapart" name="datedapart" type="date" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Available Seats</ion-label>
+      <ion-input [(ngModel)]="updatedTrajet.placedisponible" name="placedisponible" type="number" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Cost</ion-label>
+      <ion-input [(ngModel)]="updatedTrajet.cout" name="cout" type="number" required></ion-input>
+    </ion-item>
+    
+    <ion-button expand="block" style="margin-top: 20px;" type="submit">
+      Update Trajet
+    </ion-button>
+  </form>
+</ion-content>

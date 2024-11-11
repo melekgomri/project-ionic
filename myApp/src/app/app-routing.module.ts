@@ -50,9 +50,14 @@ const routes: Routes = [
   {
     path: 'list-trajet-covoitureur',
     loadChildren: () => import('./list-trajet-covoitureur/list-trajet-covoitureur.module').then( m => m.ListTrajetCovoitureurPageModule)
-  },  {
-    path: 'update-profile',
-    loadChildren: () => import('./update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
+  },
+  // {
+  //   path: 'update-profile',
+  //   loadChildren: () => import('./update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
+  // },
+  {
+    path: 'edit-trajet',
+    loadChildren: () => import('./edit-trajet/edit-trajet.module').then( m => m.EditTrajetPageModule)
   }
 
 

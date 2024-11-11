@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { UtilisateurService } from '../utilisateur.service';
+import { NavController , ViewWillEnter } from '@ionic/angular';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { UtilisateurService } from '../utilisateur.service';
   templateUrl: './list-trajet-covoitureur.page.html',
   styleUrls: ['./list-trajet-covoitureur.page.scss'],
 })
-export class ListTrajetCovoitureurPage implements OnInit {
+export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
   trajets: any[] = []; 
   reservations: any[] = [];
   covoitureurId : string | null = null;
@@ -28,15 +29,21 @@ export class ListTrajetCovoitureurPage implements OnInit {
      private authService: AuthService,
      private alertController: AlertController,
      private reservationService : ReservationService,
-     private userSer : UtilisateurService
+     private userSer : UtilisateurService,
+     private navController: NavController
     ) { }
 
   ngOnInit() {
     this.covoitureurId = localStorage.getItem('id');
     this.getTrajets();
     this.loadReservations();
-    this.loadUserProfile(); // 
+    this.loadUserProfile(); 
 
+  }
+  ionViewWillEnter() {
+    // Fetch the trajets every time the view is about to enter
+    this.getTrajets();
+    this.loadReservations();
   }
   loadUserProfile() {
     const userId = localStorage.getItem('id');
@@ -233,4 +240,13 @@ confirmReservation(id: string) {
     });
     await alert.present();
   }
+
+  editTrajet(trajet: any) {
+    const trajetId = trajet._id;  // Get the trajet ID
+    console.log(trajetId); //
+    this.navController.navigateForward('/edit-trajet', {
+      state: { id: trajetId }  // Pass the ID to the next page
+    });
+  }
+  
 }
