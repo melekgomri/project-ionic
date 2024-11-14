@@ -7,7 +7,7 @@ import { AuthService } from '../auth.service';
 import { UtilisateurService } from '../utilisateur.service';
 import { NavController , ViewWillEnter } from '@ionic/angular';
 
-
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-list-trajet-covoitureur',
   templateUrl: './list-trajet-covoitureur.page.html',
@@ -23,6 +23,10 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
   newPassword: string = '';
   confirmNewPassword: string = '';
   showChangePassword: boolean = false;
+  userId: string = '';
+    name: string = '';
+  lastName: string = ''
+
 
   constructor(private trajetService: TrajetService ,
      private router: Router,
@@ -30,33 +34,31 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
      private alertController: AlertController,
      private reservationService : ReservationService,
      private userSer : UtilisateurService,
-     private navController: NavController
+     private navController: NavController,
+     private menuController: MenuController
     ) { }
 
   ngOnInit() {
+    this.userId = localStorage.getItem('id') ?? '';  
+    this.name = localStorage.getItem('name') || '';
+    this.lastName = localStorage.getItem('lastname') || '';
     this.covoitureurId = localStorage.getItem('id');
     this.getTrajets();
     this.loadReservations();
-    this.loadUserProfile(); 
-
+    this.loadUserProfile();
+  }
+  openMenu() {
+    this.menuController.open('main-menu'); 
   }
   ionViewWillEnter() {
     // Fetch the trajets every time the view is about to enter
     this.getTrajets();
     this.loadReservations();
+    this.loadUserProfile();
   }
   loadUserProfile() {
-    const userId = localStorage.getItem('id');
-    if (userId) {
-      this.authService.getUserById(userId).subscribe(
-        (response) => {
-          this.userProfile = response;
-        },
-        (error) => {
-          console.error('Error fetching user profile:', error);
-        }
-      );
-    }
+    this.name = localStorage.getItem('name') || '';
+    this.lastName = localStorage.getItem('lastname') || '';
   }
   goToUpdateProfile() {
     this.router.navigate(['/update-profile']);
@@ -68,6 +70,7 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
         async (response) => {
           localStorage.setItem('name', this.userProfile.name);       // Update name
           localStorage.setItem('lastname', this.userProfile.lastname);
+          this.loadUserProfile();
           await this.presentAlert('Succès', 'Profile updated successfully');
         },
         async (error) => {
