@@ -186,8 +186,15 @@ confirmReservation(id: string) {
     await alert.present();
   }
   logout() {
-    localStorage.removeItem('id'); // Supprimer l'ID de l'utilisateur
-    this.router.navigate(['/login']); // Rediriger vers la page de connexion
+    // Clear user-related data from localStorage
+    localStorage.removeItem('name');
+    localStorage.removeItem('lastname');
+    localStorage.removeItem('token');  
+    localStorage.removeItem('id');  
+
+    
+ 
+    this.router.navigate(['/login']);
   }
 
   
