@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TrajetService } from '../trajet.service';
+import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router'; 
+
+
 
 @Component({
   selector: 'app-list-trajet',
@@ -9,10 +13,20 @@ import { TrajetService } from '../trajet.service';
 export class ListTrajetPage implements OnInit {
   trajets: any[]=[];
   filteredTrajets: any[] = [];
-  constructor(private  trajetService: TrajetService) { }
+  name: string = '';
+  lastName: string = ''
+  userId: string = '';
+
+  constructor(private  trajetService: TrajetService , private menuController: MenuController
+    , private router : Router
+  ) { }
 
   ngOnInit() {
     this.getalltrajets();
+    this.name = localStorage.getItem('name') || '';
+    this.lastName = localStorage.getItem('lastname') || '';
+    this.userId = localStorage.getItem('id') ?? '';  
+
   }
   getalltrajets() {
     this.trajetService.getAlltrajet().subscribe(
@@ -40,5 +54,22 @@ export class ListTrajetPage implements OnInit {
     }
   }
   
+  openMenu() {
+    this.menuController.open();
+  }
+  closeMenu() {
+    this.menuController.close();
+  }
 
+  logout() {
+    // Clear user-related data from localStorage
+    localStorage.removeItem('name');
+    localStorage.removeItem('lastname');
+    localStorage.removeItem('token');  
+    localStorage.removeItem('id');  
+
+    
+ 
+    this.router.navigate(['/login']);
+  }
 }

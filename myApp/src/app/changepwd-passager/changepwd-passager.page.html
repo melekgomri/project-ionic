@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button style="color: white;"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="margin-top: 20px;">
+    <!-- Old Password Field -->
+    <ion-item>
+      <ion-label position="floating">Old Password</ion-label>
+      <ion-input [(ngModel)]="oldPassword" type="password"></ion-input>
+    </ion-item>
+
+    <!-- New Password Field -->
+    <ion-item>
+      <ion-label position="floating">New Password</ion-label>
+      <ion-input [(ngModel)]="newPassword" type="password"></ion-input>
+    </ion-item>
+
+    <!-- Confirm New Password Field -->
+    <ion-item>
+      <ion-label position="floating">Confirm New Password</ion-label>
+      <ion-input [(ngModel)]="confirmNewPassword" type="password"></ion-input>
+    </ion-item>
+
+    <!-- Save New Password Button -->
+    <ion-button 
+      expand="block" 
+      style="margin: 20px auto; --background: #ff5722; width: 60%;" 
+      (click)="saveNewPassword()">
+      Save New Password
+    </ion-button>
+  </div>
+</ion-content>

@@ -21,6 +21,8 @@ export class LoginPage  {
         console.log('User logged in successfully', response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('id', response._id);
+        localStorage.setItem('name', response.name);
+        localStorage.setItem('lastname', response.lastname);
         
 
         console.log('isCovoitureur:', response.isCovoitureur);

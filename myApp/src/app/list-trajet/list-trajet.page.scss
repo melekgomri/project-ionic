@@ -37,4 +37,63 @@
     --background: #e64a19;
     border-radius: 10px;
   }
-  
+
+/* Custom styles for the side menu */
+ion-menu {
+  --background: #f4f4f4;  /* Light background for the menu */
+}
+
+.menu-header {
+  background-color: #ff5722;  /* Deep orange header background */
+  color: white;  /* White text for the header */
+  padding: 16px;
+}
+
+ion-avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+ion-label h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+}
+
+ion-label p {
+  font-size: 14px;
+  color: black;
+}
+
+/* Customize menu item style */
+.menu-list ion-item {
+  --background: transparent;
+  --ripple-color: #ff5722;  /* Deep orange ripple effect */
+  --border-width: 0;
+  margin-bottom: 10px;
+}
+
+/* Menu items hover effect */
+.menu-list ion-item:hover {
+  --background: #e0e0e0;
+}
+
+/* Apply custom color to icons */
+ion-icon {
+  font-size: 24px;
+  color: black;  /* Custom deep orange color for icons */
+}
+
+ion-item:hover ion-icon {
+  color: #e64a19;  /* Darker orange on hover */
+}
+
+// /* Apply custom color to menu items */
+ion-item ion-label {
+  color: black;  /* Default label text color */
+}
+
+ion-item:hover ion-label {
+  color: #ff5722;  /* Deep orange label color on hover */
+}

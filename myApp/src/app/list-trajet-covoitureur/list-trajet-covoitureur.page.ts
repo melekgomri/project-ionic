@@ -66,6 +66,8 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
     if (userId) {
       this.authService.updateUserProfile(userId, this.userProfile).subscribe(
         async (response) => {
+          localStorage.setItem('name', this.userProfile.name);       // Update name
+          localStorage.setItem('lastname', this.userProfile.lastname);
           await this.presentAlert('Succès', 'Profile updated successfully');
         },
         async (error) => {

@@ -58,7 +58,17 @@ const routes: Routes = [
   {
     path: 'edit-trajet',
     loadChildren: () => import('./edit-trajet/edit-trajet.module').then( m => m.EditTrajetPageModule)
+  },
+  {
+    path: 'profile-passager/:id',
+    loadChildren: () => import('./profile-passager/profile-passager.module').then( m => m.ProfilePassagerPageModule)
+  },
+  {
+    path: 'changepwd-passager/:id',
+    loadChildren: () => import('./changepwd-passager/changepwd-passager.module').then( m => m.ChangepwdPassagerPageModule)
   }
+
+
 
 
 ];
