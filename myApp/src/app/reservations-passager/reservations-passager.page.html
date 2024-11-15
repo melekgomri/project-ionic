@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar style="--background: #e64a19; color: #f2f2f7;">
+    <ion-title>Mes réservations</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button style="color: white;"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content" [fullscreen]="true" class="ion-padding" style="--background: #f2f2f7;">
+  <div class="header-banner">
+    <img src="assets/header-image.png" alt="Header Image" />
+  </div>
+
+  <!-- <ion-searchbar placeholder="Rechercher un trajet" animated (ionInput)="filterTrajets($event)"></ion-searchbar> -->
+
+  <ion-list class="trajet-list">
+    <ion-item *ngFor="let reservation of reservations" lines="full"  class="trajet-item">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle" size="large"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ reservation.trajet.from }} to  {{ reservation.trajet.to }} </h2>
+        <ion-text color="medium">
+          <!-- <p>From {{trajet.from}} to {{trajet.to}} </p> -->
+          <p>Departure: {{ reservation.trajet.depart }}h</p>
+          <p>Date: {{ reservation.date | date: 'yyyy-MM-dd' }}</p>
+          <p>Covoitureur: {{ reservation.covoitureur.name }} {{ reservation.covoitureur.lastname }}</p>
+         <p>Phone: {{reservation.covoitureur.phone}}</p>
+        
+        <p *ngIf="!reservation.cancelled && reservation.confirmed">Statut: Confirmé</p>
+        <p *ngIf="!reservation.cancelled && !reservation.confirmed">Statut: En attente</p>
+        <p *ngIf="reservation.annulee">Statut: Annulé par vouz</p>
+        
+          </ion-text>
+        </ion-label>
+        <ion-button
+        slot="end"
+        size="small"
+        style="--background: #e64a19; --color: #ffffff;"
+        [disabled]="reservation.cancelled"
+        (click)="showCancelAlert(reservation._id)">
+        Annuler
+      </ion-button>
+      
+      
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+

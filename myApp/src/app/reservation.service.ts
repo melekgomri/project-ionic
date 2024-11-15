@@ -35,6 +35,10 @@ export class ReservationService {
     return this.http.get(`${this.apiUrl}/covoitureur/${id}`)
   }
 
+  getReservationsByPassagerId(id: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/passager/${id}`)
+  }
+
   cancelReservation(id: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/cancel-reservation/${id}`, {}); 
   
@@ -42,5 +46,9 @@ export class ReservationService {
   confirmReservation(id: string): Observable<any> {
     return this.http.patch(`${this.apiUrl}/confirm-reservation/${id}`, {}); 
   
+  }
+
+  annulationReservation(id: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/annuler/${id}/resetStatus`, {});
   }
 }

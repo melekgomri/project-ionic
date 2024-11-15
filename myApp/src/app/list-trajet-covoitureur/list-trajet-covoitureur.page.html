@@ -85,43 +85,45 @@
               <ion-card-content>
                 <ion-row>
                   <ion-col size="auto" class="rescard">
-               
-                  <p class="dest">From: {{ reservation.trajet.from }} to  {{ reservation.trajet.to }} </p>
-                  <p>Date: {{ reservation.date | date: 'yyyy-MM-dd' }}</p>
-                  <p>Passenger: {{ reservation.passager.name }} {{ reservation.passager.lastname }}</p>
-                  <p>Email: {{ reservation.passager.email }}</p>
-                  <p>Phone: {{reservation.passager.phone}}</p>
-                </ion-col>
+                    <p class="dest">From: {{ reservation.trajet.from }} to  {{ reservation.trajet.to }} </p>
+                    <p>Date: {{ reservation.date | date: 'yyyy-MM-dd' }}</p>
+                    <p>Passenger: {{ reservation.passager.name }} {{ reservation.passager.lastname }}</p>
+                    <p>Email: {{ reservation.passager.email }}</p>
+                    <p>Phone: {{reservation.passager.phone}}</p>
+                  </ion-col>
                 </ion-row>
+                
                 <ion-row>
                   <ion-col class="ion-text-center">
-                   
                     <ion-button 
-                    color="success" 
-                    [disabled]="reservationStatus === 'confirmed' || reservationStatus === 'rejected'"
-                    (click)="confirmReservation(reservation._id)">
+                      color="success" 
+                      [disabled]="reservation.confirmed || reservation.cancelled"
+                      (click)="confirmReservation(reservation._id)">
                       <ion-icon slot="start" name="checkmark-circle"></ion-icon>
                       Approve
                     </ion-button>
                   </ion-col>
+                  
                   <ion-col class="ion-text-center">
-                    <ion-button color="danger" 
-                    [disabled]="reservationStatus === 'confirmed' || reservationStatus === 'rejected'"
-                    (click)="cancelReservation(reservation._id)">
+                    <ion-button 
+                      color="danger" 
+                      [disabled]="reservation.confirmed || reservation.cancelled"
+                      (click)="cancelReservation(reservation._id)">
                       <ion-icon slot="start" name="close-circle"></ion-icon>
                       Reject
                     </ion-button>
                   </ion-col>
                 </ion-row>
               </ion-card-content>
-              <ion-buttons slot="end">
+              
+              <!-- <ion-buttons slot="end">
                 <ion-button color="success">
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </ion-button>
                 <ion-button color="danger">
                   <ion-icon name="close-circle"></ion-icon>
                 </ion-button>
-              </ion-buttons>
+              </ion-buttons> -->
             </ion-card>
           </div>
 

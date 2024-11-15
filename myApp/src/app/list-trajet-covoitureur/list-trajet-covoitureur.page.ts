@@ -26,6 +26,8 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
   userId: string = '';
     name: string = '';
   lastName: string = ''
+  filteredReservations = [];
+
 
 
   constructor(private trajetService: TrajetService ,
@@ -43,6 +45,7 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
     this.name = localStorage.getItem('name') || '';
     this.lastName = localStorage.getItem('lastname') || '';
     this.covoitureurId = localStorage.getItem('id');
+
     this.getTrajets();
     this.loadReservations();
     this.loadUserProfile();
@@ -109,8 +112,9 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
       console.log('Fetching reservations for covoitureur ID:', this.covoitureurId);
       this.reservationService.getReservationByCovoitureurId(this.covoitureurId).subscribe(
         (data) => {
-          this.reservations = data; // Store fetched reservations
-          console.log('Fetched reservations:', this.reservations); // Check the data
+          // Filtrer les réservations pour ne garder que celles qui ne sont pas annulées
+          this.reservations = data.filter((reservation: any) => !reservation.annulee && !reservation.cancelled);
+          console.log('Fetched reservations:', this.reservations); // Vérifiez les données
         },
         (error) => {
           console.error('Error fetching reservations', error);
@@ -120,6 +124,7 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
       console.error('No covoitureur ID found in local storage.');
     }
   }
+  
 
 
   deleteTrajet(trajet: any): void {

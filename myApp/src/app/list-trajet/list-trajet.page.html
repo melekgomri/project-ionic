@@ -55,7 +55,7 @@
   <!-- Menu Content -->
   <ion-content>
     <ion-list class="menu-list">
-      <ion-item button routerLink="/home">
+      <ion-item button [routerLink]="['/reservations-passager' , userId]">
         <ion-icon slot="start" name="book" color="custom-color"></ion-icon>
         <ion-label>Mes réservations</ion-label>
       </ion-item>

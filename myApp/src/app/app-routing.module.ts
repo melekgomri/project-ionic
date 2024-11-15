@@ -66,7 +66,12 @@ const routes: Routes = [
   {
     path: 'changepwd-passager/:id',
     loadChildren: () => import('./changepwd-passager/changepwd-passager.module').then( m => m.ChangepwdPassagerPageModule)
+  },
+  {
+    path: 'reservations-passager/:id',
+    loadChildren: () => import('./reservations-passager/reservations-passager.module').then( m => m.ReservationsPassagerPageModule)
   }
+
 
 
 
