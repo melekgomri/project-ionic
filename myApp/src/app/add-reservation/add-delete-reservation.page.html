@@ -3,7 +3,7 @@
     <ion-buttons slot="start" >
       <ion-back-button style="color: #f2f2f7;"></ion-back-button>
     </ion-buttons>
-    <ion-title>Réservation</ion-title>
+    <ion-title>Booking</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
   <ion-card class="card-shadow">
     
     <ion-card-header>
-      <ion-card-title>Détails du trajet</ion-card-title>
+      <ion-card-title>Ride details</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -52,13 +52,13 @@
         <ion-row>
           <ion-col size="6">
             <ion-text color="primary">
-              <h3>Coût</h3>
+              <h3>Price</h3>
             </ion-text>
             <p>{{ trajet.cout }}DT</p>
           </ion-col>
           <ion-col size="6">
             <ion-text color="primary">
-              <h3>Conducteur</h3>
+              <h3>Driver</h3>
             </ion-text>
             <p>{{ trajet.conducteur.name }} {{ trajet.conducteur.lastname }}</p>
           </ion-col>
@@ -82,7 +82,7 @@
 
       <form (ngSubmit)="addReservation()">
         <ion-button expand="full" type="submit" style="--background: #e64a19; color: #f2f2f7;" class="submit-button">
-          Réserver
+          Book
         </ion-button>
       </form>
     </ion-card-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginPage  {
   };
 
 
-  constructor(private authservice: AuthService, private router:Router) { }
+  constructor(private authservice: AuthService, private router:Router,private    navCtr : NavController) { }
   login() {
     this.authservice.login(this.loginData).subscribe(
       (response) => {
@@ -45,6 +46,10 @@ export class LoginPage  {
 
   goToRegister() {
     this.router.navigate(['/register']); 
+  }
+
+  goHome() {
+    this.navCtr.navigateRoot('/home'); 
   }
  
 

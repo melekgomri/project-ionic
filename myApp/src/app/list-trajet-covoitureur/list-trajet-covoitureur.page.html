@@ -1,3 +1,4 @@
+<meta name="mobile-web-app-capable" content="yes">
 
 
 <ion-content>
@@ -5,12 +6,12 @@
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="mes-trajets">
         <ion-icon name="car"></ion-icon>
-        <ion-label>Mes Trajets</ion-label>
+        <ion-label>My rides</ion-label>
       </ion-tab-button>
 
       <ion-tab-button tab="reservation">
         <ion-icon name="calendar"></ion-icon>
-        <ion-label>Réservation</ion-label>
+        <ion-label>Reservations</ion-label>
       </ion-tab-button>
 
       <ion-tab-button tab="profile" (click)="openMenu()">
@@ -20,120 +21,90 @@
     </ion-tab-bar>
 
     <!-- Mes Trajets Tab -->
-    <ion-tab tab="mes-trajets"><ion-header>
-      <ion-toolbar>
-        <ion-title>Mes Trajets</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="navigateToAddTrajetPage()" fill="clear">
-            <ion-icon slot="icon-only" name="add-circle-outline" color="light"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
+    <ion-tab tab="mes-trajets">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>My rides</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="navigateToAddTrajetPage()" fill="clear">
+              <ion-icon slot="icon-only" name="add-circle-outline" color="light"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
       <ion-content>
-        <div *ngIf="trajets && trajets.length > 0; else noTrajetsMessage">
-          <ion-card class="trajet-card" *ngFor="let trajet of trajets">
-            
-            <ion-card-content>
-              <ion-row class="ion-align-items-center">
-                <ion-col size="auto" class="content-left">
-                  <p class="dest">From {{ trajet.from }} to {{ trajet.to }}</p>
-                  <p>Heure de départ: {{ trajet.depart }}h </p>
-                  <p>Date de départ: {{ trajet.datedapart | date: 'yyyy-MM-dd' }}</p>
-                  <p>Places disponibles: {{ trajet.placedisponible }}</p>
-                  <p>Coût: {{ trajet.cout }} DT</p>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col  class="content-right" >
-                  <ion-button color="danger" class="trash" (click)="deleteTrajet(trajet)">
-                    <ion-icon name="trash-outline"></ion-icon>
-                    Supprimer
-                  </ion-button>
-            
-                  <ion-button color="success" class="edit" style="margin-left: 20px;" (click)="editTrajet(trajet)">
-                    <ion-icon name="create-outline"></ion-icon>
-                    Modifier
-                  </ion-button>
-                </ion-col>
-              </ion-row>
-            </ion-card-content>
-            
-            
-          </ion-card>
-        </div>
+        <ion-list *ngIf="trajets && trajets.length > 0; else noTrajetsMessage" class="trajet-list">
+          <ion-item *ngFor="let trajet of trajets" class="trajet-item" lines="full">
+            <ion-label>
+              <h2>From {{ trajet.from }} to {{ trajet.to }}</h2>
+              <p>Departure: {{ trajet.depart }}h</p>
+              <p>Date: {{ trajet.datedapart | date: 'yyyy-MM-dd' }}</p>
+              <p>Available places: {{ trajet.placedisponible }}</p>
+              <p>price: <strong>{{ trajet.cout }} DT</strong></p>
+            </ion-label>
+            <ion-button slot="end" color="danger" (click)="deleteTrajet(trajet)">
+              <ion-icon slot="start" name="trash-outline"></ion-icon>
+              Delete
+            </ion-button>
+            <ion-button slot="end" color="success" (click)="editTrajet(trajet)">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Update
+            </ion-button>
+          </ion-item>
+        </ion-list>
         <ng-template #noTrajetsMessage>
-          <div class="no-trajets">
-            <p>Aucun trajet trouvé pour cet utilisateur.</p>
-          </div>
+          <ion-label>No rides availables.</ion-label>
         </ng-template>
       </ion-content>
+      
     </ion-tab>
+    
 
     <!-- Reservations Tab -->
     <ion-tab tab="reservation">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Réservations</ion-title>
+          <ion-title>Reservations</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <div class="reservation-content">
-          <div *ngIf="reservations && reservations.length > 0; else noReservationsMessage">
-            <ion-card class="reservation-card" *ngFor="let reservation of reservations">
-              
-              <ion-card-content>
-                <ion-row>
-                  <ion-col size="auto" class="rescard">
-                    <p class="dest">From: {{ reservation.trajet.from }} to  {{ reservation.trajet.to }} </p>
-                    <p>Date: {{ reservation.date | date: 'yyyy-MM-dd' }}</p>
-                    <p>Passenger: {{ reservation.passager.name }} {{ reservation.passager.lastname }}</p>
-                    <p>Email: {{ reservation.passager.email }}</p>
-                    <p>Phone: {{reservation.passager.phone}}</p>
-                  </ion-col>
-                </ion-row>
-                
-                <ion-row>
-                  <ion-col class="ion-text-center">
-                    <ion-button 
-                      color="success" 
-                      [disabled]="reservation.confirmed || reservation.cancelled"
-                      (click)="confirmReservation(reservation._id)">
-                      <ion-icon slot="start" name="checkmark-circle"></ion-icon>
-                      Approve
-                    </ion-button>
-                  </ion-col>
-                  
-                  <ion-col class="ion-text-center">
-                    <ion-button 
-                      color="danger" 
-                      [disabled]="reservation.confirmed || reservation.cancelled"
-                      (click)="cancelReservation(reservation._id)">
-                      <ion-icon slot="start" name="close-circle"></ion-icon>
-                      Reject
-                    </ion-button>
-                  </ion-col>
-                </ion-row>
-              </ion-card-content>
-              
-              <!-- <ion-buttons slot="end">
-                <ion-button color="success">
-                  <ion-icon name="checkmark-circle"></ion-icon>
+         
+            <ion-list *ngIf="reservations && reservations.length > 0; else noReservationsMessage"class="reservation-list">
+              <ion-item class="reservation-item" *ngFor="let reservation of reservations">
+                <ion-label>
+                  <h2>From: {{ reservation.trajet.from }} to {{ reservation.trajet.to }}</h2>
+                  <p>Date: {{ reservation.date | date: 'yyyy-MM-dd' }}</p>
+                  <p>Passenger: {{ reservation.passager.name }} {{ reservation.passager.lastname }}</p>
+                  <p>Email: {{ reservation.passager.email }}</p>
+                  <p>Phone: {{ reservation.passager.phone }}</p>
+                </ion-label>
+                <ion-button 
+                  slot="end"
+                  color="success"
+                  [disabled]="reservation.confirmed || reservation.cancelled"
+                  (click)="confirmReservation(reservation._id)">
+                  <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+                  Approve
                 </ion-button>
-                <ion-button color="danger">
-                  <ion-icon name="close-circle"></ion-icon>
+                <ion-button 
+                  slot="end"
+                  color="danger"
+                  [disabled]="reservation.confirmed || reservation.cancelled"
+                  (click)="cancelReservation(reservation._id)">
+                  <ion-icon slot="start" name="close-circle"></ion-icon>
+                  Reject
                 </ion-button>
-              </ion-buttons> -->
-            </ion-card>
-          </div>
-
+              </ion-item>
+            </ion-list>
+         
           <ng-template #noReservationsMessage>
             <div class="no-reservations">
-              <p>Aucune réservation trouvée.</p>
+              <p>No reservations available.</p>
             </div>
           </ng-template>
-        </div>
+        
       </ion-content>
+      
     </ion-tab>
 
     <!-- Profile Tab -->

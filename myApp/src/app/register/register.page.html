@@ -12,12 +12,12 @@
     <img class="register-image" src="../../assets/background.jpg" alt="Registration Image" />
     <div class="register-container">
       <ion-item>
-        <ion-label position="floating">Nom</ion-label>
+        <ion-label position="floating">Name</ion-label>
         <ion-input [(ngModel)]="userdata.name"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Prénom</ion-label>
+        <ion-label position="floating">Lastname</ion-label>
         <ion-input [(ngModel)]="userdata.lastname"></ion-input>
       </ion-item>
 
@@ -27,7 +27,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-label position="floating">Password</ion-label>
         <ion-input [(ngModel)]="userdata.password" type="password"></ion-input>
       </ion-item>
       <ion-item>
@@ -37,11 +37,11 @@
 
 
       <ion-item>
-        <ion-label>Covoitureur</ion-label>
+        <ion-label>Carpooler</ion-label>
         <ion-checkbox slot="start" [(ngModel)]="userdata.isCovoitureur"></ion-checkbox>
       </ion-item>
 
-      <ion-button expand="block" (click)="register()">S'inscrire</ion-button>
+      <ion-button expand="block" (click)="register()">Register</ion-button>
       <a (click)="goToLogin()" class="account-message">
         Already have an account?
       </a>

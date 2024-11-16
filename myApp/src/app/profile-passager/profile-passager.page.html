@@ -10,15 +10,15 @@
 
 <ion-content>
   <div class="profile-content">
-    <h2 style="margin-left: 10px;">Profile</h2>
+    <h2 style="margin-left: 10px; font-size: 18px; font-weight: bold;">Profile details</h2>
 
     <!-- Profile Info Fields -->
     <ion-item>
-      <ion-label position="floating">Nom</ion-label>
+      <ion-label position="floating">Name</ion-label>
       <ion-input [(ngModel)]="userProfile.name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Prénom</ion-label>
+      <ion-label position="floating">lastname</ion-label>
       <ion-input [(ngModel)]="userProfile.lastname"></ion-input>
     </ion-item>
     <ion-item>
@@ -26,7 +26,7 @@
       <ion-input [(ngModel)]="userProfile.email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Téléphone</ion-label>
+      <ion-label position="floating">Phone</ion-label>
       <ion-input [(ngModel)]="userProfile.phone" type="tel"></ion-input>
     </ion-item>
 
@@ -36,7 +36,7 @@
       style="margin: 20px auto; --background: #ff5722; width: 60%;" 
       (click)="updateUserProfile()"
       >
-      Save Profile
+      Save updates
     </ion-button>
 
 

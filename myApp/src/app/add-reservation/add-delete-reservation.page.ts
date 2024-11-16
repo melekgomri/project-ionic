@@ -131,6 +131,10 @@ export class AddDeleteReservationPage implements OnInit {
   }
 
   addReservation() {
+    if (this.trajet && this.trajet.placedisponible === 0) {
+      this.presentAlert('No Available Places', 'There are no available seats for this trip.');
+      return; // Stop the execution if no places are available
+    }
     this.reservationData.passager = this.getPassengerId();
     this.reservationService.addreservation(this.reservationData).subscribe(
       async (response) => {
