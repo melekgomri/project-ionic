@@ -11,4 +11,12 @@ export class AvisService {
   submitReview(reviewData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/addavis`, reviewData);
   }
+
+  getAllReviewsByCarpoolerId(id : string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/reviews/${id}`)
+  }
+
+  count(id : string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/count/${id}`)
+  }
 }

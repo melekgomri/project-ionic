@@ -16,14 +16,19 @@ export class RateCarpoolerPage implements OnInit {
   stars: number[] = [1, 2, 3, 4, 5]; 
   auteur: string='';
   covoitureur: any = {}; 
+  reviews: any[] = []; 
+  reviewCount: number = 0;
+  limit: number =3;
+  displayedReviews: any[] = [];
   constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute , private avisService : AvisService,private utilisateurService: UtilisateurService) {}
 
   ngOnInit() {
     this.carpoolerId = this.activatedRoute.snapshot.paramMap.get('id') || '';
-
     // Get passenger (auteur) ID from localStorage
     this.auteur = localStorage.getItem('id') || ''; 
     this.fetchCarpoolerDetails();
+    this.fetchReviews();
+    this.getReviewCount();
   }
 
   setRating(star: number) {
@@ -66,5 +71,35 @@ export class RateCarpoolerPage implements OnInit {
         console.error('Error fetching carpooler details:', err);
       },
     });
+  }
+
+  fetchReviews() {
+    this.avisService.getAllReviewsByCarpoolerId(this.carpoolerId).subscribe(
+      (data) => {
+        this.reviews = data; // Store the reviews in the component
+        this.displayedReviews = this.reviews.slice(0, this.limit); 
+      },
+      (error) => {
+        console.error('Error fetching reviews:', error);
+      }
+    );
+  }
+
+  loadMoreReviews() {
+    const currentLength = this.displayedReviews.length;
+    const nextReviews = this.reviews.slice(currentLength, currentLength + this.limit);
+    this.displayedReviews = [...this.displayedReviews, ...nextReviews];
+  }
+
+  // Get the count of reviews for the carpooler
+  getReviewCount() {
+    this.avisService.count(this.carpoolerId).subscribe(
+      (data) => {
+        this.reviewCount = data.count; // Store the review count
+      },
+      (error) => {
+        console.error('Error fetching review count:', error);
+      }
+    );
   }
 }
