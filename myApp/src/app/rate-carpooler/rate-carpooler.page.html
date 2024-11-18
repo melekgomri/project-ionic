@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar style="--background: #e64a19; color: #f2f2f7;">
+    <ion-title>Carpoolers</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button style="color: #f2f2f7;"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <form (ngSubmit)="submitReview()">
+    <ion-item>
+      <ion-label><strong>Carpooler: {{ covoitureur?.name }} {{ covoitureur?.lastname }}</strong></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Rating</ion-label>
+      <div class="stars">
+        <ion-icon *ngFor="let star of stars; let i = index" 
+                  [name]="i < rating ? 'star' : 'star-outline'" 
+                  (click)="setRating(i + 1)">
+        </ion-icon>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Review</ion-label>
+      <ion-input [(ngModel)]="reviewContent" name="reviewContent"></ion-input>
+    </ion-item>
+
+    <ion-button style="--background: #e64a19; color: #f2f2f7; height: 40px; width: 200px; margin-top: 10px; margin-left: 80px;"  type="submit">Submit</ion-button>
+  </form>
+</ion-content>

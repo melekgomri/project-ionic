@@ -1,0 +1,15 @@
+.stars {
+    display: flex;
+    justify-content: start;
+  }
+  
+  .stars ion-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: gold;
+  }
+  
+  .stars ion-icon:hover {
+    color: orange;
+  }
+  

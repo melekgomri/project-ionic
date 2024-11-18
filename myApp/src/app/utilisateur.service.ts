@@ -24,4 +24,8 @@ changePwd(id: string  ,newdata: any): Observable<any> {
 allCarpoolers(): Observable<any> {
   return this.http.get(`${this.apiurl}/covoitureurs/all`);
 }
+
+getUserById(id: string): Observable<any> {
+  return this.http.get(`${this.apiurl}/getbyid/${id}`);
+}
 }

@@ -70,9 +70,14 @@ const routes: Routes = [
   {
     path: 'reservations-passager/:id',
     loadChildren: () => import('./reservations-passager/reservations-passager.module').then( m => m.ReservationsPassagerPageModule)
-  },  {
+  },
+  {
     path: 'list-covoitureurs',
     loadChildren: () => import('./list-covoitureurs/list-covoitureurs.module').then( m => m.ListCovoitureursPageModule)
+  },
+  {
+    path: 'rate-carpooler/:id',
+    loadChildren: () => import('./rate-carpooler/rate-carpooler.module').then( m => m.RateCarpoolerPageModule)
   }
 
 
