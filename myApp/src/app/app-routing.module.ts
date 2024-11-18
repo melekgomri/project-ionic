@@ -70,7 +70,11 @@ const routes: Routes = [
   {
     path: 'reservations-passager/:id',
     loadChildren: () => import('./reservations-passager/reservations-passager.module').then( m => m.ReservationsPassagerPageModule)
+  },  {
+    path: 'list-covoitureurs',
+    loadChildren: () => import('./list-covoitureurs/list-covoitureurs.module').then( m => m.ListCovoitureursPageModule)
   }
+
 
 
 

@@ -20,4 +20,8 @@ deleteutilisateur(id: string): Observable<any> {
 changePwd(id: string  ,newdata: any): Observable<any> {
   return this.http.put(`${this.apiurl}/change-password/${id}`, newdata);
 }
+
+allCarpoolers(): Observable<any> {
+  return this.http.get(`${this.apiurl}/covoitureurs/all`);
+}
 }
