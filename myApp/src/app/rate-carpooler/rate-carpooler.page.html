@@ -32,7 +32,13 @@
 
   <div class="carousel">
     <div class="carousel-item" *ngFor="let review of displayedReviews; let i = index" [class.active]="i === currentIndex">
-      <h3>{{ review.auteur.name }} {{ review.auteur.lastname }}</h3>
+      
+      <div style="display: inline-flex; align-items: center;">
+        <ion-icon name="person-circle-outline" style="font-size: 24px; margin-right: 8px;"></ion-icon>
+        <h3 style="font-size: 16px; margin: 0;">{{ review.auteur.name }} {{ review.auteur.lastname }}</h3>
+      </div>
+      
+      
       <p>{{ review.contenue }}</p>
       <p>
         <strong>Rating: 
