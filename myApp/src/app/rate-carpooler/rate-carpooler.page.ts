@@ -17,11 +17,12 @@ export class RateCarpoolerPage implements OnInit {
   auteur: string='';
   covoitureur: any = {}; 
   reviews: any[] = []; 
-  reviewCount: number = 0;
+  // reviewCount: number = 0;
   controlsVisible: boolean = true;
     displayedReviews: any[] = [];
   currentIndex: number = 0;
   stars2: number[] = [1, 2, 3, 4, 5];
+  
   constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute , private avisService : AvisService,private utilisateurService: UtilisateurService) {}
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class RateCarpoolerPage implements OnInit {
     this.auteur = localStorage.getItem('id') || ''; 
     this.fetchCarpoolerDetails();
     this.fetchReviews();
-    this.getReviewCount();
+    
   }
   starsArray(type: string, rating: number): any[] {
     if (type === 'selected') {
@@ -48,8 +49,10 @@ export class RateCarpoolerPage implements OnInit {
 
   submitReview() {
     if (!this.rating || !this.reviewContent) {
-      return; // Prevent submission if no rating or content
+      return; 
     }
+    const auteurName = localStorage.getItem('name'); 
+    const auteurLastname = localStorage.getItem('lastname'); 
   
     const reviewData = {
       contenue: this.reviewContent,
@@ -66,7 +69,10 @@ export class RateCarpoolerPage implements OnInit {
         // Add the new review to the reviews array
         const newReview = {
           ...reviewData,
-          auteur: { name: 'Your Name', lastname: 'Your Lastname' }, // Optionally update with fetched user details
+          auteur: {
+            name: auteurName,        // Carpooler's name
+            lastname: auteurLastname  // Carpooler's last name
+          },
           datePublication: new Date(),
         };
         this.reviews.unshift(newReview);
@@ -115,23 +121,7 @@ export class RateCarpoolerPage implements OnInit {
   }
   
 
-  // loadMoreReviews() {
-  //   const currentLength = this.displayedReviews.length;
-  //   const nextReviews = this.reviews.slice(currentLength, currentLength + this.limit);
-  //   this.displayedReviews = [...this.displayedReviews, ...nextReviews];
-  // }
-
-  // Get the count of reviews for the carpooler
-  getReviewCount() {
-    this.avisService.count(this.carpoolerId).subscribe(
-      (data) => {
-        this.reviewCount = data.count; // Store the review count
-      },
-      (error) => {
-        console.error('Error fetching review count:', error);
-      }
-    );
-  }
+  
 
   prevSlide() {
     this.currentIndex = (this.currentIndex - 1 + this.displayedReviews.length) % this.displayedReviews.length;
