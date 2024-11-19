@@ -177,9 +177,12 @@ ion-button[disabled] {
   color: #888;
 }
 
-.no-reservations, .no-trajets {
-  font-size: 16px;
-  color: #888;
+.no-reservations {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; 
+  text-align: center; 
 }
 
 /* Custom styling for reservation and trajet details */
@@ -198,4 +201,11 @@ ion-item .reservation-item ion-label h2 {
 /* Adjustments for the buttons in the lists */
 ion-button[slot="end"] {
   --margin-end: 8px;
+}
+.no-rides-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; 
+  text-align: center; 
 }

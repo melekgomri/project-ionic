@@ -80,21 +80,30 @@
   }
   
   .carousel-controls button:hover {
-    background: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+    background: rgba(0, 0, 0, 0.8); 
   }
   
   .carousel-controls button:focus {
-    outline: none; /* Remove focus outline */
+    outline: none; 
   }
   
   .selected-stars, .unselected-stars {
-    font-size: 10px; /* You can adjust the size here */
+    font-size: 10px; 
   }
   .selected-stars {
-    color: gold; /* Or any color you prefer for selected stars */
+    color: gold; 
   }
   
   .unselected-stars {
-    color: lightgray; /* Or any color you prefer for unselected stars */
+    color: lightgray; 
+  }
+  .no-reviews-message {
+    text-align: center; 
+    display: flex;      
+    justify-content: center; 
+    align-items: center;
+    height: 100%;       
+    font-size: 18px;    
+    color: #555;       
   }
   

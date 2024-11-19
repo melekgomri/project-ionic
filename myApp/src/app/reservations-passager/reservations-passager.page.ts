@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../reservation.service';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-reservations-passager',
   templateUrl: './reservations-passager.page.html',
@@ -11,6 +12,7 @@ export class ReservationsPassagerPage implements OnInit {
   passagerId : string = '';
   constructor(private reservationService : ReservationService,
     private alertController: AlertController,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -74,20 +76,21 @@ export class ReservationsPassagerPage implements OnInit {
   async showCancelAlert(reservationId: string) {
     const alert = await this.alertController.create({
       header: 'Confirmation',
-      message: 'Êtes-vous sûr de vouloir annuler cette action ?',
+message: 'Are you sure you want to cancel this action?',
+
       buttons: [
         {
-          text: 'Non',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Annulation de l\'action');
           }
         },
         {
-          text: 'Oui',
+          text: 'Yes',
           handler: () => {
-            this.resetStatus(reservationId); // Passez l'ID à resetStatus
-          }
+            this.resetStatus(reservationId);
+            window.location.reload();          }
         }
       ]
     });

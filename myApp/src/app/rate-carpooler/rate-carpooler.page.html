@@ -31,6 +31,9 @@
   </form>
 
   <div class="carousel">
+    <div *ngIf="displayedReviews.length === 0" class="no-reviews-message">
+      <p>No reviews available.</p>
+    </div>
     <div class="carousel-item" *ngFor="let review of displayedReviews; let i = index" [class.active]="i === currentIndex">
       
       <div style="display: inline-flex; align-items: center;">
