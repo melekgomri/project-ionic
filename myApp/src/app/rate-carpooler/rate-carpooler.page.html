@@ -30,28 +30,36 @@
     <ion-button style="--background: #e64a19; color: #f2f2f7; height: 40px; width: 200px; margin-top: 10px; margin-left: 80px;"  type="submit">Submit</ion-button>
   </form>
 
-  <div  *ngIf="carpoolerId" style="margin-left: 20px; margin-bottom: 50px;">
-    <h2 style="font-size: 17px;">Reviews for Carpooler {{ covoitureur.name  }} {{ covoitureur.lastname  }}</h2>
-
-    <!-- Display the count of reviews -->
-    <p style="margin-left: 4px;">Total Reviews: {{ reviewCount }}</p>
-
-    <!-- List of reviews -->
-    <ion-list>
-      <ion-item *ngFor="let review of displayedReviews">
-        <ion-label>
-          <h3>{{ review.auteur.name }} {{ review.auteur.lastname }}</h3>
-          <p>{{ review.contenue }}</p>
-          <p><strong>Rating: {{ review.note }} Stars</strong></p>
-          <p>Posted on: {{ review.datePublication | date }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-    <div style="height: 20px;"></div>
-    <ion-text *ngIf="displayedReviews.length < reviews.length">
-      <a (click)="loadMoreReviews()">View More</a>
-    </ion-text>
+  <div class="carousel">
+    <div class="carousel-item" *ngFor="let review of displayedReviews; let i = index" [class.active]="i === currentIndex">
+      <h3>{{ review.auteur.name }} {{ review.auteur.lastname }}</h3>
+      <p>{{ review.contenue }}</p>
+      <p>
+        <strong>Rating: 
+          <span class="selected-stars">
+            <!-- Display the selected stars -->
+            <ng-container *ngFor="let star of starsArray('selected', review.note)">
+              &#9733; <!-- Filled star (solid) -->
+            </ng-container>
+          </span>
+          <span class="unselected-stars">
+            <!-- Display the unselected stars -->
+            <ng-container *ngFor="let star of starsArray('unselected', review.note)">
+              &#9734; <!-- Empty star (outline) -->
+            </ng-container>
+          </span>
+        </strong>
+      </p>
+      
+      <p>Posted on: {{ review.datePublication | date }}</p>
+    </div>
+    <div class="carousel-controls">
+      <button (click)="prevSlide()">&#10094;</button>
+      <button (click)="nextSlide()">&#10095;</button>
+    </div>
   </div>
+  
+  
 
   <div *ngIf="!carpoolerId">
     <p>Invalid Carpooler ID</p>

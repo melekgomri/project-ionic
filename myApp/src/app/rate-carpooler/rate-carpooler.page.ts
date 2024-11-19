@@ -18,8 +18,10 @@ export class RateCarpoolerPage implements OnInit {
   covoitureur: any = {}; 
   reviews: any[] = []; 
   reviewCount: number = 0;
-  limit: number =3;
-  displayedReviews: any[] = [];
+  controlsVisible: boolean = true;
+    displayedReviews: any[] = [];
+  currentIndex: number = 0;
+  stars2: number[] = [1, 2, 3, 4, 5];
   constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute , private avisService : AvisService,private utilisateurService: UtilisateurService) {}
 
   ngOnInit() {
@@ -30,7 +32,16 @@ export class RateCarpoolerPage implements OnInit {
     this.fetchReviews();
     this.getReviewCount();
   }
-
+  starsArray(type: string, rating: number): any[] {
+    if (type === 'selected') {
+      // Return an array with the number of selected stars
+      return this.stars2.filter(star => star <= rating);
+    } else if (type === 'unselected') {
+      // Return an array for unselected stars
+      return this.stars.filter(star => star > rating);
+    }
+    return [];
+  }
   setRating(star: number) {
     this.rating = star;
   }
@@ -39,7 +50,7 @@ export class RateCarpoolerPage implements OnInit {
     if (!this.rating || !this.reviewContent) {
       return; // Prevent submission if no rating or content
     }
-
+  
     const reviewData = {
       contenue: this.reviewContent,
       note: this.rating,
@@ -47,17 +58,35 @@ export class RateCarpoolerPage implements OnInit {
       auteur: this.auteur,
       covoitureur: this.carpoolerId,
     };
-
+  
     this.avisService.submitReview(reviewData).subscribe(
       (response) => {
         console.log('Review submitted successfully', response);
-        this.router.navigate(['/list-covoitureurs']); // Navigate to a different page or display a success message
+  
+        // Add the new review to the reviews array
+        const newReview = {
+          ...reviewData,
+          auteur: { name: 'Your Name', lastname: 'Your Lastname' }, // Optionally update with fetched user details
+          datePublication: new Date(),
+        };
+        this.reviews.unshift(newReview);
+  
+        // Update the displayed reviews directly without limit
+        this.displayedReviews = this.reviews; // Display all reviews
+  
+        // Reset the carousel index
+        this.currentIndex = 0;
+  
+        // Clear the input fields
+        this.reviewContent = '';
+        this.rating = 0;
       },
       (error) => {
         console.error('Error submitting review:', error);
       }
     );
   }
+  
 
   fetchCarpoolerDetails() {
     const carpoolerId = this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -76,20 +105,21 @@ export class RateCarpoolerPage implements OnInit {
   fetchReviews() {
     this.avisService.getAllReviewsByCarpoolerId(this.carpoolerId).subscribe(
       (data) => {
-        this.reviews = data; // Store the reviews in the component
-        this.displayedReviews = this.reviews.slice(0, this.limit); 
+        this.reviews = data; 
+        this.displayedReviews = this.reviews; 
       },
       (error) => {
         console.error('Error fetching reviews:', error);
       }
     );
   }
+  
 
-  loadMoreReviews() {
-    const currentLength = this.displayedReviews.length;
-    const nextReviews = this.reviews.slice(currentLength, currentLength + this.limit);
-    this.displayedReviews = [...this.displayedReviews, ...nextReviews];
-  }
+  // loadMoreReviews() {
+  //   const currentLength = this.displayedReviews.length;
+  //   const nextReviews = this.reviews.slice(currentLength, currentLength + this.limit);
+  //   this.displayedReviews = [...this.displayedReviews, ...nextReviews];
+  // }
 
   // Get the count of reviews for the carpooler
   getReviewCount() {
@@ -102,4 +132,13 @@ export class RateCarpoolerPage implements OnInit {
       }
     );
   }
+
+  prevSlide() {
+    this.currentIndex = (this.currentIndex - 1 + this.displayedReviews.length) % this.displayedReviews.length;
+  }
+  
+  nextSlide() {
+    this.currentIndex = (this.currentIndex + 1) % this.displayedReviews.length;
+  }
+
 }

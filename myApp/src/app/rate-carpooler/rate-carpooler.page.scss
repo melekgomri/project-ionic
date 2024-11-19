@@ -4,7 +4,7 @@
   }
   
   .stars ion-icon {
-    font-size: 30px;
+    font-size: 20px;
     cursor: pointer;
     color: gold;
   }
@@ -25,3 +25,76 @@
   a:hover {
     text-decoration: underline;
   }
+  /* Carousel Container */
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 90%; 
+    max-width: 600px; 
+    margin: 0 auto; 
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 250px;
+    background-color: #f9f9f9;
+    margin-top:40px;
+
+  }
+  
+  /* Carousel Items */
+  .carousel-item {
+    display: none; /* Hide items by default */
+    padding: 20px;
+    text-align: center;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .carousel-item.active {
+    display: block; 
+    opacity: 1; 
+  }
+  
+  /* Carousel Controls */
+  .carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+     transform: translateY(-50%);
+    
+   
+    opacity: 0.2;
+    font-size: 8px; 
+  padding: 0 10px;
+  }
+  
+  .carousel-controls button {
+    background: rgba(0, 0, 0, 0.6); 
+    color: #fff; 
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: background 0.3s ease;
+  }
+  
+  .carousel-controls button:hover {
+    background: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+  }
+  
+  .carousel-controls button:focus {
+    outline: none; /* Remove focus outline */
+  }
+  
+  .selected-stars, .unselected-stars {
+    font-size: 10px; /* You can adjust the size here */
+  }
+  .selected-stars {
+    color: gold; /* Or any color you prefer for selected stars */
+  }
+  
+  .unselected-stars {
+    color: lightgray; /* Or any color you prefer for unselected stars */
+  }
+  
