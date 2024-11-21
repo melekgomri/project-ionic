@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { UtilisateurService } from '../utilisateur.service';
 import { NavController , ViewWillEnter } from '@ionic/angular';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { MenuController } from '@ionic/angular';
 @Component({
@@ -37,7 +38,8 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
      private reservationService : ReservationService,
      private userSer : UtilisateurService,
      private navController: NavController,
-     private menuController: MenuController
+     private menuController: MenuController,
+     private cdr: ChangeDetectorRef
     ) { }
 
   ngOnInit() {
@@ -150,13 +152,16 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
         console.error('Error deleting trajet', error);
       }
     );
-  }
-  cancelReservation(id: string) {
+  }cancelReservation(id: string) {
     this.reservationService.cancelReservation(id).subscribe(
-      async (response) => {
+      async (response: any) => {
         console.log('Reservation canceled:', response);
-        this.reservationStatus = 'rejected';
-        await this.presentAlert('Succès', 'La réservation a été annulée avec succès !');
+        const reservation = this.reservations.find(r => r._id === id);
+        if (reservation) {
+          reservation.cancelled = true;
+        }
+        await this.presentAlert('Success', 'The reservation has been successfully canceled!');
+        this.cdr.detectChanges(); // Notify Angular of the changes
       },
       async (error) => {
         console.error('Error canceling reservation:', error);
@@ -164,23 +169,24 @@ export class ListTrajetCovoitureurPage implements OnInit , ViewWillEnter {
       }
     );
   }
-
-  // Method to handle reservation confirmation
-confirmReservation(id: string) {
-  this.reservationService.confirmReservation(id).subscribe(
-    async (response) => {
-      console.log('Reservation confirmed:', response);
-      this.reservationStatus = 'confirmed';
-      await this.presentAlert('Succès', 'La réservation a été confirmée avec succès !');
-      // Optionally, update the UI to reflect the new available places
-      this.getTrajets()
-    },
-    async (error) => {
-      console.error('Error confirming reservation:', error);
-      await this.presentAlert('Erreur', 'Une erreur est survenue lors de la confirmation de la réservation.');
-    }
-  );
-}
+  
+  confirmReservation(id: string) {
+    this.reservationService.confirmReservation(id).subscribe(
+      async (response: any) => {
+        console.log('Reservation confirmed:', response);
+        const reservation = this.reservations.find(r => r._id === id);
+        if (reservation) {
+          reservation.confirmed = true;
+        }
+        await this.presentAlert('Success', 'The reservation has been successfully confirmed!');
+        this.cdr.detectChanges(); // Notify Angular of the changes
+      },
+      async (error) => {
+        console.error('Error confirming reservation:', error);
+        await this.presentAlert('Erreur', 'Une erreur est survenue lors de la confirmation de la réservation.');
+      }
+    );
+  }
 
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({

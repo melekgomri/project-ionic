@@ -28,9 +28,9 @@
           <p>Covoitureur: {{ reservation.covoitureur.name }} {{ reservation.covoitureur.lastname }}</p>
          <p>Phone: {{reservation.covoitureur.phone}}</p>
         
-        <p *ngIf="!reservation.cancelled && reservation.confirmed">Statut: Confirmé</p>
-        <p *ngIf="!reservation.cancelled && !reservation.confirmed">Statut: En attente</p>
-        <p *ngIf="reservation.annulee">Statut: Annulé par vouz</p>
+        <p *ngIf="!reservation.cancelled && reservation.confirmed">Status: Confirmed</p>
+        <p *ngIf="!reservation.cancelled && !reservation.confirmed">Status: Pending</p>
+        <p *ngIf="reservation.annulee">Status: Canceled by you.</p>
         
           </ion-text>
         </ion-label>
